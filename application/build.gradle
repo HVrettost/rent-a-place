@@ -1,0 +1,10 @@
+group 'com.blueground'
+version '1.0'
+
+dependencies {
+    implementation project(':reviews')
+    implementation project(':units')
+    implementation project(':users')
+}
+
+

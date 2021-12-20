@@ -1,0 +1,14 @@
+plugins {
+    id 'groovy'
+    id 'java'
+}
+
+group 'com.blueground.units'
+version '1.0.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+}

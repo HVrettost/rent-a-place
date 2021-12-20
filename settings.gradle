@@ -1,0 +1,5 @@
+rootProject.name = 'bg-backend-assignment'
+include 'users'
+include 'reviews'
+include 'units'
+

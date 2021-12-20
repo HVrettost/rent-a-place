@@ -1,0 +1,25 @@
+version: '3.8'
+services:
+  marsrental-database:
+    image: postgres:14.1
+    environment:
+      POSTGRES_USER: marsrental_user
+      POSTGRES_PASSWORD: marsrental_password
+      POSTGRES_DB: marsrentaldb
+    ports:
+      - 5432:5432
+    container_name: marsrental-database
+
+  marsrental-migration:
+    image: flyway/flyway:8.2.3
+    environment:
+      FLYWAY_USER: marsrental_user
+      FLYWAY_PASSWORD: marsrental_password
+      FLYWAY_SCHEMAS: marsrental
+      FLYWAY_URL: jdbc:postgresql://marsrental-database:5432/marsrentaldb
+    command: -connectRetries=60 migrate
+    depends_on:
+      - marsrental-database
+    volumes:
+      - ./migration-scripts:/flyway/sql
+    container_name: marsrental-flyway

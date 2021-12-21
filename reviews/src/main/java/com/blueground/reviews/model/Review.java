@@ -1,4 +1,4 @@
-package com.blueground.reviews.model.entity;
+package com.blueground.reviews.model;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -28,4 +28,7 @@ public class Review {
 
     @Column(name = "USER_ID")
     private UUID userId;
+
+    @Version
+    private Integer version;
 }

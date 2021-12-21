@@ -1,4 +1,4 @@
-package com.blueground.reviews.model.dto;
+package com.blueground.reviews.domain;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -9,8 +9,7 @@ import java.util.UUID;
 @Setter
 public class ReviewDto {
 
-    private UUID reviewId;
-    private Integer score;
+    private int score;
     private String comment;
     private UUID unitId;
     private UUID userId;

@@ -1,10 +1,10 @@
 package com.blueground.reviews.dao;
 
 import com.blueground.reviews.exception.ReviewsException;
-import com.blueground.reviews.model.dto.ReviewDto;
+import com.blueground.reviews.domain.ReviewDto;
 
 public interface ReviewsDao {
 
-    void storeReview(ReviewDto review) throws ReviewsException;
+    void insertReviewInDatabase(ReviewDto review) throws ReviewsException;
 
 }

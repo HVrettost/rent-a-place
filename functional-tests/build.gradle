@@ -1,0 +1,12 @@
+group 'com.blueground'
+version '1.0'
+
+bootJar {
+    enabled = false
+}
+
+task runFunctionalTests(type: Test) {
+    useJUnitPlatform()
+    failFast = true
+}
+

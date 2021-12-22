@@ -2,7 +2,7 @@ package com.blueground.reviews.controller;
 
 import com.blueground.reviews.api.ReviewsApi;
 import com.blueground.reviews.exception.ReviewsException;
-import com.blueground.reviews.domain.ReviewDto;
+import com.blueground.reviews.model.dto.ReviewDto;
 import com.blueground.reviews.service.ReviewsService;
 import com.blueground.reviews.validator.Validator;
 import lombok.RequiredArgsConstructor;

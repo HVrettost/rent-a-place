@@ -1,11 +1,10 @@
 package com.blueground.reviews.dao;
 
 import com.blueground.reviews.exception.ReviewsException;
-import com.blueground.reviews.domain.ReviewDto;
+import com.blueground.reviews.model.dto.ReviewDto;
 import com.blueground.reviews.exception.error.ReviewsErrorCodes;
-import com.blueground.reviews.exception.error.ReviewsErrorDetails;
 import com.blueground.reviews.exception.utils.ReviewsExceptionUtils;
-import com.blueground.reviews.model.Review;
+import com.blueground.reviews.model.entity.Review;
 import com.blueground.reviews.repository.ReviewsRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,7 +18,7 @@ import java.util.UUID;
 @Controller
 @RequiredArgsConstructor
 @Slf4j
-public class ReviewsDaoImpl implements ReviewsDao {
+public class DefaultReviewsDao implements ReviewsDao {
 
     private final ReviewsRepository reviewsRepository;
     private final Converter<ReviewDto, Review> reviewDtoConverter;

@@ -1,6 +1,6 @@
 package com.blueground.reviews.repository;
 
-import com.blueground.reviews.model.Review;
+import com.blueground.reviews.model.entity.Review;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

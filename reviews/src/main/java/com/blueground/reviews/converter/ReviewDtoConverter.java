@@ -1,7 +1,7 @@
 package com.blueground.reviews.converter;
 
-import com.blueground.reviews.domain.ReviewDto;
-import com.blueground.reviews.model.Review;
+import com.blueground.reviews.model.dto.ReviewDto;
+import com.blueground.reviews.model.entity.Review;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 

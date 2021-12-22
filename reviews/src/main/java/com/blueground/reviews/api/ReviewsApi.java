@@ -1,14 +1,14 @@
 package com.blueground.reviews.api;
 
 import com.blueground.reviews.exception.ReviewsException;
-import com.blueground.reviews.domain.ReviewDto;
+import com.blueground.reviews.model.dto.ReviewDto;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@RequestMapping(value = "v1/marsrental")
+@RequestMapping(value = "marsrental/v1")
 public interface ReviewsApi {
 
     @PostMapping(value = "reviews",

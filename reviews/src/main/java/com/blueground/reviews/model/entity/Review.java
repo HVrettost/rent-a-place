@@ -1,4 +1,4 @@
-package com.blueground.reviews.model;
+package com.blueground.reviews.model.entity;
 
 import lombok.Getter;
 import lombok.Setter;

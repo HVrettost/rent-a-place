@@ -1,4 +1,4 @@
-package com.blueground.reviews.domain;
+package com.blueground.reviews.model.dto;
 
 import lombok.Getter;
 import lombok.Setter;

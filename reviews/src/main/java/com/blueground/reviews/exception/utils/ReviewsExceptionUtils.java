@@ -8,6 +8,6 @@ import lombok.experimental.UtilityClass;
 public class ReviewsExceptionUtils {
 
     public ReviewsErrorDetails createErrorDetails(ReviewsErrorCodes error) {
-        return new ReviewsErrorDetails(error.getErrorCode(), error.getDescription(), error.getHttpStatus());
+        return new ReviewsErrorDetails(error.getApplicationErrorCode(), error.getDescription(), error.getHttpStatus());
     }
 }

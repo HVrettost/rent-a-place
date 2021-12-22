@@ -9,7 +9,7 @@ import org.springframework.web.client.RestTemplate
 class SaveReviewRequest implements Request {
 
     private RestTemplate restTemplate
-    private String url = '%s/v1/marsrental/reviews'
+    private String url = '%s/marsrental/v1/reviews'
     private ReviewDto reviewDto
 
     SaveReviewRequest(RestTemplate restTemplate, ReviewDto reviewDto) {

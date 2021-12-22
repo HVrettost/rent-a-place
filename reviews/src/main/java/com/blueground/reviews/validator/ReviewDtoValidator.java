@@ -1,6 +1,6 @@
 package com.blueground.reviews.validator;
 
-import com.blueground.reviews.domain.ReviewDto;
+import com.blueground.reviews.model.dto.ReviewDto;
 import com.blueground.reviews.exception.ReviewsException;
 import com.blueground.reviews.exception.error.ReviewsErrorCodes;
 import com.blueground.reviews.exception.utils.ReviewsExceptionUtils;

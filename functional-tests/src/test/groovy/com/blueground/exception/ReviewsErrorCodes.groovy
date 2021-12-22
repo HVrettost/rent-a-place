@@ -11,18 +11,18 @@ enum ReviewsErrorCodes {
     UNIT_ID_NOT_FOUND(400, "Unit id could not be found", HttpStatus.BAD_REQUEST),
     REVIEW_ALREADY_EXISTS(500, "Review with given user id and unit id already exists", HttpStatus.CONFLICT)
 
-    private final int errorCode
+    private final int applicationErrorCode
     private final String description
     private final HttpStatus httpStatus
 
-    ReviewsErrorCodes(int errorCode, String description, HttpStatus httpStatus) {
-        this.errorCode = errorCode
+    ReviewsErrorCodes(int applicationErrorCode, String description, HttpStatus httpStatus) {
+        this.applicationErrorCode = applicationErrorCode
         this.description = description
         this.httpStatus = httpStatus
     }
 
-    int getErrorCode() {
-        this.errorCode
+    int getApplicationErrorCode() {
+        this.applicationErrorCode
     }
 
     String getDescription() {

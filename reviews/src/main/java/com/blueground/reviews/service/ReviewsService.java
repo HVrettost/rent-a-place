@@ -1,7 +1,7 @@
 package com.blueground.reviews.service;
 
 import com.blueground.reviews.exception.ReviewsException;
-import com.blueground.reviews.domain.ReviewDto;
+import com.blueground.reviews.model.dto.ReviewDto;
 
 public interface ReviewsService {
 

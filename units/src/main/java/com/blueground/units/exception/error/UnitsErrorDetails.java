@@ -1,13 +1,13 @@
-package com.blueground.reviews.exception.error;
+package com.blueground.units.exception.error;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 
-@RequiredArgsConstructor
 @Getter
-public class ReviewsErrorDetails {
+@RequiredArgsConstructor
+public class UnitsErrorDetails {
 
     private final int applicationErrorCode;
     private final String description;

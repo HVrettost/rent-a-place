@@ -2,11 +2,11 @@ package com.blueground.exception
 
 class ErrorDetails {
 
-    private int errorCode
+    private int applicationErrorCode
     private String description
 
-    ErrorDetails(int errorCode, String description) {
-        this.errorCode = errorCode
+    ErrorDetails(int applicationErrorCode, String description) {
+        this.applicationErrorCode = applicationErrorCode
         this.description = description
     }
 
@@ -14,12 +14,12 @@ class ErrorDetails {
 
     }
 
-    int getErrorCode() {
-        this.errorCode
+    int getApplicationErrorCode() {
+        this.applicationErrorCode
     }
 
-    void setErrorCode(int errorCode) {
-        this.errorCode = errorCode
+    void setApplicationErrorCode(int errorCode) {
+        this.applicationErrorCode = errorCode
     }
 
     String getDescription() {

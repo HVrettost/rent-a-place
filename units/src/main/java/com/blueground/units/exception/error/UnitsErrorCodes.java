@@ -1,16 +1,17 @@
-package com.blueground.reviews.exception.error;
+package com.blueground.units.exception.error;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 
 @RequiredArgsConstructor
 @Getter
-public class ReviewsErrorDetails {
+public enum UnitsErrorCodes {
+
+    GENERIC_UNITS_ERROR(0, "Something went really bad", HttpStatus.INTERNAL_SERVER_ERROR),
+    EMPTY_SEARCH_VALUE(100, "The value you passed is empty", HttpStatus.BAD_REQUEST);
 
     private final int applicationErrorCode;
     private final String description;
-    @JsonIgnore
     private final HttpStatus httpStatus;
 }

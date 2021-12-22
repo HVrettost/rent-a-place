@@ -20,7 +20,7 @@ class ReviewsSpec extends MarsRentalFTSetup {
         then:
             response.rawHttpStatus == 400
             with(deserializedResponse) {
-                errorCode == ReviewsErrorCodes.USER_ID_NOT_FOUND.errorCode
+                applicationErrorCode == ReviewsErrorCodes.USER_ID_NOT_FOUND.applicationErrorCode
                 description == ReviewsErrorCodes.USER_ID_NOT_FOUND.description
             }
     }
@@ -36,7 +36,7 @@ class ReviewsSpec extends MarsRentalFTSetup {
         then:
             response.rawHttpStatus == 400
             with(deserializedResponse) {
-                errorCode == ReviewsErrorCodes.UNIT_ID_NOT_FOUND.errorCode
+                applicationErrorCode == ReviewsErrorCodes.UNIT_ID_NOT_FOUND.applicationErrorCode
                 description == ReviewsErrorCodes.UNIT_ID_NOT_FOUND.description
             }
     }
@@ -53,7 +53,7 @@ class ReviewsSpec extends MarsRentalFTSetup {
         then:
             response.rawHttpStatus == 400
             with(deserializedResponse) {
-                errorCode == ReviewsErrorCodes.INVALID_SCORE.errorCode
+                applicationErrorCode == ReviewsErrorCodes.INVALID_SCORE.applicationErrorCode
                 description == ReviewsErrorCodes.INVALID_SCORE.description
             }
 
@@ -81,7 +81,7 @@ class ReviewsSpec extends MarsRentalFTSetup {
         then: 'an exception is thrown stating that the review for the given unit already exists'
             errorResponse.rawHttpStatus == 409
             with(deserializedResponse) {
-                errorCode == ReviewsErrorCodes.REVIEW_ALREADY_EXISTS.errorCode
+                applicationErrorCode == ReviewsErrorCodes.REVIEW_ALREADY_EXISTS.applicationErrorCode
                 description == ReviewsErrorCodes.REVIEW_ALREADY_EXISTS.description
             }
     }

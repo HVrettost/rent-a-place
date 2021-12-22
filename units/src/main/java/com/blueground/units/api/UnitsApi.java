@@ -1,0 +1,20 @@
+package com.blueground.units.api;
+
+import com.blueground.units.exception.UnitsException;
+import com.blueground.units.model.dto.UnitDto;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
+
+@RequestMapping(value = "marsrental/v1")
+public interface UnitsApi {
+
+    @GetMapping(value = "/units",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<List<UnitDto>> getUnitsBySearchKeyword(@RequestParam(value = "search") String searchValue) throws UnitsException;
+}

@@ -9,7 +9,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @Entity
-@Table(name = "REVIEWS")
+@Table(name = "REVIEWS", schema = "MARSRENTAL")
 public class Review {
 
     @Id
@@ -29,6 +29,4 @@ public class Review {
     @Column(name = "USER_ID")
     private UUID userId;
 
-    @Version
-    private Integer version;
 }

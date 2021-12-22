@@ -1,0 +1,7 @@
+group 'com.blueground.test'
+version '1.0'
+
+bootJar {
+    enabled = false
+}
+

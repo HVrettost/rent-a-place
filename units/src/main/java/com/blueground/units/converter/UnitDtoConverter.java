@@ -18,6 +18,7 @@ public class UnitDtoConverter implements Converter<Unit, UnitDto> {
         unitDto.setDescription(unit.getDescription());
         unitDto.setImageUrl(unit.getImageUrl());
         unitDto.setPrice(unit.getPrice());
+        unitDto.setAverageScore(unit.getAverageScore());
 
         return unitDto;
     }

@@ -1,10 +1,9 @@
 package com.blueground.units.service;
 
-import com.blueground.units.model.dto.UnitDto;
-
-import java.util.List;
+import com.blueground.units.model.domain.PageReq;
+import com.blueground.units.model.dto.UnitsResponseDto;
 
 public interface UnitsService {
 
-    List<UnitDto> getUnitsByKeyword(String searchValue);
+    UnitsResponseDto getUnitsByKeyword(String searchValue, PageReq pageRequest);
 }

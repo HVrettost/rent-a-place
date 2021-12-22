@@ -2,6 +2,7 @@ package com.blueground.reviews.api;
 
 import com.blueground.reviews.exception.ReviewsException;
 import com.blueground.reviews.model.dto.ReviewDto;
+import com.blueground.units.exception.UnitsException;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,5 +15,5 @@ public interface ReviewsApi {
     @PostMapping(value = "reviews",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<Void> saveReview(@RequestBody ReviewDto reviewDto) throws ReviewsException;
+    ResponseEntity<Void> saveReview(@RequestBody ReviewDto reviewDto) throws ReviewsException, UnitsException;
 }

@@ -10,7 +10,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @Entity
-@Table(name = "UNITS")
+@Table(name = "UNITS", schema = "MARSRENTAL")
 public class Unit {
 
     @Id
@@ -35,4 +35,7 @@ public class Unit {
 
     @Column(name = "PRICE")
     private BigDecimal price;
+
+    @Column(name = "AVERAGE_SCORE")
+    private Integer averageScore;
 }

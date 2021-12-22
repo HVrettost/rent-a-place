@@ -5,6 +5,7 @@ import com.blueground.reviews.exception.ReviewsException;
 import com.blueground.reviews.model.dto.ReviewDto;
 import com.blueground.reviews.service.ReviewsService;
 import com.blueground.reviews.validator.Validator;
+import com.blueground.units.exception.UnitsException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,9 +19,9 @@ public class ReviewsController implements ReviewsApi {
     private final Validator<ReviewDto> reviewDtoValidator;
 
     @Override
-    public ResponseEntity<Void> saveReview(ReviewDto reviewDto) throws ReviewsException {
+    public ResponseEntity<Void> saveReview(ReviewDto reviewDto) throws ReviewsException, UnitsException {
         reviewDtoValidator.validate(reviewDto);
-        reviewsService.saveReview(reviewDto);
+        reviewsService.saveReviewAndUpdateAverageScoreForUnit(reviewDto);
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

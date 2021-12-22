@@ -17,4 +17,5 @@ public class UnitDto {
     private String description;
     private Boolean cancellationPolicy;
     private BigDecimal price;
+    private Integer averageScore;
 }

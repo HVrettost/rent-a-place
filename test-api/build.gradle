@@ -5,3 +5,9 @@ bootJar {
     enabled = false
 }
 
+dependencies {
+    implementation project(':reviews')
+    implementation project(':units')
+    implementation project(':users')
+}
+

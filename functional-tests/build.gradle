@@ -5,8 +5,11 @@ bootJar {
     enabled = false
 }
 
+
 task runFunctionalTests(type: Test) {
     useJUnitPlatform()
     failFast = true
 }
+
+
 

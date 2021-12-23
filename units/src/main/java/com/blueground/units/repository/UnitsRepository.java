@@ -13,7 +13,8 @@ import java.util.UUID;
 @Repository
 public interface UnitsRepository extends JpaRepository<Unit, UUID> {
 
-    Page<Unit> getUnitsByRegion(String region, Pageable pageable);
+    @Query(value = "SELECT * FROM MARSRENTAL.UNITS WHERE SEARCH_TOKENS @@ TO_TSQUERY(?1)", nativeQuery = true)
+    Page<Unit> findUnitsBySearchValue(String searchValue, Pageable pageable);
 
     @Modifying
     @Query(value = "UPDATE MARSRENTAL.UNITS SET AVERAGE_SCORE = ?1 WHERE UNIT_ID = ?2", nativeQuery = true)

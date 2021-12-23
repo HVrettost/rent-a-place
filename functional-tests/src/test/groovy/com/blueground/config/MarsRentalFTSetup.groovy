@@ -1,5 +1,6 @@
 package com.blueground.config
 
+import com.blueground.actors.SystemActor
 import com.blueground.actors.UserActor
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.springframework.web.client.RestTemplate
@@ -12,6 +13,9 @@ class MarsRentalFTSetup extends Specification {
     UserActor userActor
 
     @Shared
+    SystemActor systemActor
+
+    @Shared
     RestTemplate restTemplate
 
     @Shared
@@ -19,6 +23,7 @@ class MarsRentalFTSetup extends Specification {
 
     def setupSpec() {
         userActor = new UserActor()
+        systemActor = new SystemActor()
         restTemplate = new RestTemplate()
         objectMapper = new ObjectMapper()
     }

@@ -1,13 +1,8 @@
 package com.blueground.users;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import javax.persistence.*;
 import java.util.UUID;
 
-@Getter
-@Setter
 @Entity
 @Table(name = "USERS", schema = "MARSRENTAL")
 public class User {
@@ -27,5 +22,45 @@ public class User {
     private String username;
 
     @Column(name = "PASSWORD")
-    private UUID password;
+    private String password;
+
+    public UUID getUserId() {
+        return this.userId;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public String getSurname() {
+        return this.surname;
+    }
+
+    public String getUsername() {
+        return this.username;
+    }
+
+    public String getPassword() {
+        return this.password;
+    }
+
+    public void setUserId(UUID userId) {
+        this.userId = userId;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }

@@ -20,15 +20,16 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class DefaultUnitsDao implements UnitsDao {
 
-    private static final String SORTING_VALUE = "score";
+    private static final String SORTING_VALUE = "averageScore";
 
     private final UnitsRepository unitsRepository;
     private final UnitDtoConverter unitDtoConverter;
 
     @Override
     public UnitsResponseDto getUnits(String searchValue, PageReq pageRequest) {
-        Pageable pageable = PageRequest.of(pageRequest.getPage(), pageRequest.getPageSize(), Sort.by(SORTING_VALUE));
-        Page<Unit> unitsPage =  unitsRepository.getUnitsByRegion(searchValue, pageable);
+        Pageable pageable = PageRequest.of(pageRequest.getPage(),
+                pageRequest.getPageSize(), Sort.by(Sort.Order.desc(SORTING_VALUE)));
+        Page<Unit> unitsPage =  unitsRepository.findUnitsBySearchValue(searchValue, pageable);
 
         List<UnitDto> units = unitsPage.getContent()
                 .stream()

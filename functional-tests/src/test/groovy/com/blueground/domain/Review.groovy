@@ -1,6 +1,6 @@
 package com.blueground.domain
 
-class ReviewDto {
+class Review {
 
     private int score
     private String comment

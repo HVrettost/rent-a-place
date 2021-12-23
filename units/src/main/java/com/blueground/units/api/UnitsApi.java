@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface UnitsApi {
 
     @GetMapping(value = "/units",
-            consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<UnitsResponseDto> getUnitsBySearchKeyword(@RequestParam(value = "search") String searchValue,
                                                              @RequestParam(value = "page") Integer page,

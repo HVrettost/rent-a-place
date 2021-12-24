@@ -5,4 +5,5 @@ include 'units'
 include 'application'
 include 'functional-tests'
 include 'test-api'
+include 'auth'
 

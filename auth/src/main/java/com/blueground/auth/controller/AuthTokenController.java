@@ -1,0 +1,53 @@
+package com.blueground.auth.controller;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.blueground.auth.api.AuthTokenApi;
+import com.blueground.auth.model.dto.AuthenticationRequestDto;
+import com.blueground.auth.service.AuthTokenService;
+import com.blueground.auth.service.AuthenticationService;
+
+@RestController
+public class AuthTokenController implements AuthTokenApi {
+
+    private final AuthenticationService authenticationService;
+    private final AuthTokenService authTokenService;
+
+    public AuthTokenController(AuthenticationService authenticationService,
+                               AuthTokenService authTokenService) {
+        this.authenticationService = authenticationService;
+        this.authTokenService = authTokenService;
+    }
+
+    @Override
+    public ResponseEntity<Void> generateAccessToken(HttpServletRequest httpServletRequest,
+                                                    AuthenticationRequestDto authenticationRequest) {
+        authenticationService.authenticate(authenticationRequest);
+        HttpHeaders httpHeaders = authTokenService.createCookieHeadersForAuthorization(httpServletRequest, authenticationRequest.getUsername());
+
+        return new ResponseEntity<>(httpHeaders, HttpStatus.NO_CONTENT);
+    }
+
+    @Override
+    public ResponseEntity<Void> updateAccessToken(HttpServletRequest httpServletRequest) {
+        HttpHeaders httpHeaders = authTokenService.updateCookieHeaderForAccessToken(httpServletRequest);
+        return new ResponseEntity<>(httpHeaders, HttpStatus.NO_CONTENT);
+    }
+
+    @Override
+    public ResponseEntity<Void> invalidateRefreshToken(HttpServletRequest httpServletRequest) {
+        authTokenService.invalidateRefreshToken(httpServletRequest);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @Override
+    public ResponseEntity<Void> invalidateRefreshTokensByUsername(HttpServletRequest httpServletRequest) {
+        authTokenService.invalidateRefreshTokensByUsername(httpServletRequest);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+}

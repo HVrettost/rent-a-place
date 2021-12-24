@@ -1,4 +1,4 @@
-group 'com.blueground.test'
+group 'com.blueground.functionaltests'
 version '1.0'
 
 bootJar {

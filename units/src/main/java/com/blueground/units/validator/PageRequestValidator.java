@@ -1,9 +1,9 @@
 package com.blueground.units.validator;
 
+import com.blueground.units.model.domain.PageReq;
 import com.blueground.units.exception.UnitsException;
 import com.blueground.units.exception.error.UnitsErrorCodes;
 import com.blueground.units.exception.utils.UnitsExceptionUtils;
-import com.blueground.units.model.domain.PageReq;
 import org.springframework.stereotype.Component;
 
 @Component

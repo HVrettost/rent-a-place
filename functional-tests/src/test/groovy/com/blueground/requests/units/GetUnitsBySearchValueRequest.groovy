@@ -12,7 +12,7 @@ class GetUnitsBySearchValueRequest implements Request {
     private RestTemplate restTemplate
     private String url = '%s/marsrental/v1/units?search=%s&page=%d&pageSize=%d'
 
-    GetUnitsBySearchValueRequest(RestTemplate restTemplate, String searchValue, int page, int pageSize) {
+    GetUnitsBySearchValueRequest(RestTemplate restTemplate, String searchValue, Integer page, Integer pageSize) {
         this.restTemplate = restTemplate
         url = String.format(url, HOST, searchValue, page, pageSize)
     }
@@ -20,7 +20,7 @@ class GetUnitsBySearchValueRequest implements Request {
     @Override
     def execute() {
         try {
-            restTemplate.getForObject(url, Unit[])
+            restTemplate.getForEntity(url, Unit[])
         } catch (HttpClientErrorException | HttpServerErrorException exception) {
             new HttpErrorResponse(exception.rawStatusCode, exception.responseBodyAsString)
         }

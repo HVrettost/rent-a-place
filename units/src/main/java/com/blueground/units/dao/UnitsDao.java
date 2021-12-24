@@ -1,9 +1,11 @@
 package com.blueground.units.dao;
 
 import com.blueground.units.model.domain.PageReq;
-import com.blueground.units.model.dto.UnitsResponseDto;
+import com.blueground.units.model.dto.UnitDto;
+
+import java.util.List;
 
 public interface UnitsDao {
 
-    UnitsResponseDto getUnits(String searchValue, PageReq pageRequest);
+    List<UnitDto> getUnitsBySearchValueThatMatchesRegionAndTitle(String searchValue, PageReq pageRequest);
 }

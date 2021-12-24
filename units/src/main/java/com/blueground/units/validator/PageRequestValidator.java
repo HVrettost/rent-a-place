@@ -11,7 +11,7 @@ public class PageRequestValidator implements Validator<PageReq> {
 
     @Override
     public void validate(PageReq pageReq) throws UnitsException {
-        if (pageReq.getPage() == null || pageReq.getPageSize() == null)
+        if (pageReq.getPage() < 0 || pageReq.getPageSize() <= 0)
             throw new UnitsException(UnitsExceptionUtils.createErrorDetails(UnitsErrorCodes.INVALID_PAGE_REQUEST));
     }
 }

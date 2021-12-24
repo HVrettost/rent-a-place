@@ -2,10 +2,12 @@ package com.blueground.units.service;
 
 import com.blueground.units.dao.UnitsDao;
 import com.blueground.units.model.domain.PageReq;
-import com.blueground.units.model.dto.UnitsResponseDto;
+import com.blueground.units.model.dto.UnitDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -15,8 +17,9 @@ public class DefaultUnitsService implements UnitsService {
 
     @Override
     @Transactional(readOnly = true)
-    public UnitsResponseDto getUnitsByKeyword(String searchValue, PageReq pageRequest) {
+    public List<UnitDto> getUnitsBySearchValue(String searchValue, PageReq pageRequest) {
         String lowerCasedSearchValue = searchValue.toLowerCase();
-        return unitsDao.getUnits(lowerCasedSearchValue, pageRequest);
+
+        return unitsDao.getUnitsBySearchValueThatMatchesRegionAndTitle(lowerCasedSearchValue, pageRequest);
     }
 }

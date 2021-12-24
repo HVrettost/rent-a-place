@@ -13,7 +13,7 @@ trait UserActions {
         request.execute()
     }
 
-    def getUnitsPagedBySearchValue(RestTemplate restTemplate, String searchValue, int page, int pageSize) {
+    def getUnitsPagedBySearchValue(RestTemplate restTemplate, String searchValue, Integer page, Integer pageSize) {
         Request request = new GetUnitsBySearchValueRequest(restTemplate, searchValue, page, pageSize)
         request.execute()
     }

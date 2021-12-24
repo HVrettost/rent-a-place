@@ -2,6 +2,7 @@ package com.blueground.units.model.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -30,6 +31,7 @@ public class Unit {
     @Column(name = "DESCRIPTION")
     private String description;
 
+    @ColumnDefault(value = "FALSE")
     @Column(name = "CANCELLATION_POLICY")
     private Boolean cancellationPolicy;
 

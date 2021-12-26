@@ -1,6 +1,8 @@
 package com.blueground.functionaltests.requests
 
-interface Request {
+import com.blueground.functionaltests.utils.HeaderUtils
+
+interface Request extends HeaderUtils {
 
     static final String HOST = 'http://localhost:8080'
 

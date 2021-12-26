@@ -8,7 +8,7 @@ import org.springframework.util.StringUtils;
 @Component
 public class UsernameValidator implements Validator<String> {
 
-    private static final int USERNAME_ACCEPTABLE_LENGTH = 10;
+    private static final int USERNAME_ACCEPTABLE_LENGTH = 100;
 
     @Override
     public void validate(String username) throws AuthenticationException {

@@ -20,6 +20,9 @@ public class AuthRoleToUsername {
     @Column(name = "USERNAME")
     private String username;
 
+    @Column(name = "USER_ID")
+    private UUID userId;
+
     @Column(name = "ROLE")
     private String role;
 

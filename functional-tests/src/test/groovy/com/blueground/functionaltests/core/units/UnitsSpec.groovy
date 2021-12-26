@@ -16,14 +16,23 @@ class UnitsSpec extends MarsRentalFTSetup implements UserUtils {
 
     def cleanup() {
         systemActor.deleteAllUnitsFromDatabase(restTemplate)
+        systemActor.deleteAllUsersFromDatabase(restTemplate)
     }
 
     def "should return error if searchValue passed is null or empty"() {
-        given:
+        given: 'a user with access token'
+            def username = UUID.randomUUID().toString()
+            def password = 'password'
+            UserCreationRequestDto request = createUserRequest(username, password)
+            User user = systemActor.createNewUser(restTemplate, request)
+            def userAgent = 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0'
+            def cookieWithAccessToken = createAccessTokenForUser(userAgent, username, password)
+
+        and:
             def searchValue = ''
 
         when:
-            HttpErrorResponse response = userActor.getUnitsPagedBySearchValue(restTemplate, searchValue, 0, 2)
+            HttpErrorResponse response = userActor.getUnitsPagedBySearchValue(restTemplate, searchValue, 0, 2, cookieWithAccessToken, userAgent)
             def deserializedResponse = objectMapper.readValue(response.errorResponseAsString, ErrorDetails)
 
         then:
@@ -36,11 +45,19 @@ class UnitsSpec extends MarsRentalFTSetup implements UserUtils {
 
     @Unroll
     def "should return error if page request values are invalid"() {
-        given:
+        given: 'a user with access token'
+            def username = UUID.randomUUID().toString()
+            def password = 'password'
+            UserCreationRequestDto request = createUserRequest(username, password)
+            User user = systemActor.createNewUser(restTemplate, request)
+            def userAgent = 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0'
+            def cookieWithAccessToken = createAccessTokenForUser(userAgent, username, password)
+
+        and:
             def searchValue = 'a search value'
 
         when:
-            HttpErrorResponse response = userActor.getUnitsPagedBySearchValue(restTemplate, searchValue, page, pageSize)
+            HttpErrorResponse response = userActor.getUnitsPagedBySearchValue(restTemplate, searchValue, page, pageSize, cookieWithAccessToken, userAgent)
             def deserializedResponse = objectMapper.readValue(response.errorResponseAsString, ErrorDetails)
 
         then:
@@ -68,19 +85,23 @@ class UnitsSpec extends MarsRentalFTSetup implements UserUtils {
             Unit unit6 = systemActor.createNewUnit(restTemplate, new UnitCreationRequestDto('Athens', 'Lycabettus Majesty', new BigDecimal("290")))
             Unit unit7 = systemActor.createNewUnit(restTemplate, new UnitCreationRequestDto('Athens', 'Kolonaki Avenue', new BigDecimal("1299")))
 
-        and: 'a user'
-            UserCreationRequestDto request = createUserRequest('username', 'encrypted-pass')
+        and: 'a user with access token'
+            def username = UUID.randomUUID().toString()
+            def password = 'password'
+            UserCreationRequestDto request = createUserRequest(username, password)
             User user = systemActor.createNewUser(restTemplate, request)
+            def userAgent = 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0'
+            def cookieWithAccessToken = createAccessTokenForUser(userAgent, username, password)
 
         and: 'reviews are done in some of the units from the user'
-            userActor.saveReview(restTemplate, new Review(score: 4, unitId: unit1.unitId, comment: 'comment 1', userId: user.userId))
-            userActor.saveReview(restTemplate, new Review(score: 5, unitId: unit2.unitId, comment: 'comment 2', userId: user.userId))
-            userActor.saveReview(restTemplate, new Review(score: 1, unitId: unit7.unitId, comment: 'comment 3', userId: user.userId))
-            userActor.saveReview(restTemplate, new Review(score: 3, unitId: unit5.unitId, comment: 'comment 4', userId: user.userId))
+            userActor.saveReview(restTemplate, new Review(score: 4, unitId: unit1.unitId, comment: 'comment 1', userId: user.userId), cookieWithAccessToken, userAgent)
+            userActor.saveReview(restTemplate, new Review(score: 5, unitId: unit2.unitId, comment: 'comment 2', userId: user.userId), cookieWithAccessToken, userAgent)
+            userActor.saveReview(restTemplate, new Review(score: 1, unitId: unit7.unitId, comment: 'comment 3', userId: user.userId), cookieWithAccessToken, userAgent)
+            userActor.saveReview(restTemplate, new Review(score: 3, unitId: unit5.unitId, comment: 'comment 4', userId: user.userId), cookieWithAccessToken, userAgent)
 
         when: 'a call is made by the user to get the first page for the available units according to given the keyword Athens'
             def searchValue = 'Athens'
-            def units = userActor.getUnitsPagedBySearchValue(restTemplate, searchValue, 0, 2)
+            def units = userActor.getUnitsPagedBySearchValue(restTemplate, searchValue, 0, 2, cookieWithAccessToken, userAgent)
 
         then: 'it should be sorted based on average score'
             with (units.body) {
@@ -95,7 +116,7 @@ class UnitsSpec extends MarsRentalFTSetup implements UserUtils {
             }
 
         when: 'a call is made by the user to get the second page for the available units according to given the keyword Athens'
-            units = userActor.getUnitsPagedBySearchValue(restTemplate, searchValue, 1, 2)
+            units = userActor.getUnitsPagedBySearchValue(restTemplate, searchValue, 1, 2, cookieWithAccessToken, userAgent)
 
         then: 'it should be sorted based on average score'
             with (units.body) {
@@ -110,7 +131,7 @@ class UnitsSpec extends MarsRentalFTSetup implements UserUtils {
             }
 
         when: 'a call is made by the user to get the last page for the available units according to given the keyword Athens'
-            units = userActor.getUnitsPagedBySearchValue(restTemplate, searchValue, 2, 2)
+            units = userActor.getUnitsPagedBySearchValue(restTemplate, searchValue, 2, 2, cookieWithAccessToken, userAgent)
 
         then: 'it should be sorted based on average score'
             with (units.body) {
@@ -132,17 +153,21 @@ class UnitsSpec extends MarsRentalFTSetup implements UserUtils {
             Unit unit6 = systemActor.createNewUnit(restTemplate, new UnitCreationRequestDto('Athens', 'Lycabettus Majesty', new BigDecimal("290")))
             Unit unit7 = systemActor.createNewUnit(restTemplate, new UnitCreationRequestDto('Athens', 'Kolonaki Majestic Avenue', new BigDecimal("1299")))
 
-        and: 'a user'
-            UserCreationRequestDto request = createUserRequest('username', 'encrypted-pass')
+        and: 'a user with access token'
+            def username = UUID.randomUUID().toString()
+            def password = 'password'
+            UserCreationRequestDto request = createUserRequest(username, password)
             User user = systemActor.createNewUser(restTemplate, request)
+            def userAgent = 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0'
+            def cookieWithAccessToken = createAccessTokenForUser(userAgent, username, password)
 
         and: 'reviews are done in some of the units from the user'
-            userActor.saveReview(restTemplate, new Review(score: 4, unitId: unit1.unitId, comment: 'comment 1', userId: user.userId))
-            userActor.saveReview(restTemplate, new Review(score: 5, unitId: unit4.unitId, comment: 'comment 2', userId: user.userId))
+            userActor.saveReview(restTemplate, new Review(score: 4, unitId: unit1.unitId, comment: 'comment 1', userId: user.userId), cookieWithAccessToken, userAgent)
+            userActor.saveReview(restTemplate, new Review(score: 5, unitId: unit4.unitId, comment: 'comment 2', userId: user.userId), cookieWithAccessToken, userAgent)
 
         when: 'a call is made by the user to get the first page for the available units according to keyword MAJESTIC(check if relaxed rules for CASE INSENSITIVE works as expected)'
             def searchValue = 'MAJESTIC'
-            def units = userActor.getUnitsPagedBySearchValue(restTemplate, searchValue, 0, 10)
+            def units = userActor.getUnitsPagedBySearchValue(restTemplate, searchValue, 0, 10, cookieWithAccessToken, userAgent)
 
         then: 'it should fetch results sorted in just one page'
             with (units.body) {
@@ -162,7 +187,7 @@ class UnitsSpec extends MarsRentalFTSetup implements UserUtils {
             }
 
         when: 'a call is made by the user to get the second page  but no results are fetched'
-            units = userActor.getUnitsPagedBySearchValue(restTemplate, searchValue, 1, 10)
+            units = userActor.getUnitsPagedBySearchValue(restTemplate, searchValue, 1, 10, cookieWithAccessToken, userAgent)
 
         then: 'it should be sorted based on average score'
             units.body.length == 0

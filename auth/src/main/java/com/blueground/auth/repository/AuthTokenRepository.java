@@ -16,11 +16,8 @@ public interface AuthTokenRepository extends JpaRepository<RefreshTokenWhitelist
     @Modifying
     void deleteAllByUsername(@Param("username") String username);
 
-    int countByUsernameAndUserAgent(@Param("username") String username,
-                                    @Param("userAgent") String userAgent);
-
     boolean existsByUsernameAndUserAgent(@Param("username") String username,
-                                                                 @Param("userAgent") String userAgent);
+                                         @Param("userAgent") String userAgent);
 
     boolean existsByUsername(@Param("username") String username);
 }

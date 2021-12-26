@@ -6,8 +6,6 @@ public interface RefreshTokenWhitelistDao {
 
     void invalidateRefreshToken(String username, String userAgent);
 
-    int countTokensByUsernameAndUserAgent(String username, String userAgent);
-
     void invalidateRefreshTokensByUsername(String username);
 
     boolean isRefreshTokenExistsByUsername(String username);

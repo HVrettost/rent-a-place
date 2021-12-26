@@ -6,33 +6,55 @@ import com.blueground.functionaltests.dto.AuthenticationRequestDto
 import com.blueground.functionaltests.dto.UserCreationRequestDto
 import com.blueground.functionaltests.utils.JwtUtils
 import com.blueground.functionaltests.utils.UserUtils
+import spock.lang.Unroll
 
 class AuthSpec extends MarsRentalFTSetup implements UserUtils, JwtUtils {
 
-    def cleanup() {
+    def cleanupSpec() {
         systemActor.deleteAllUsersFromDatabase(restTemplate)
     }
 
     def "user should authenticate successfully and receive access token"() {
-        given: 'a user'
-            //decrypted value translates to password
-            UserCreationRequestDto request = createUserRequest('jonsnow','$2a$12$meMe5iToZsEAN0WZCHtPdO2LwQKqa..jEHt5ZsQzwrsomi3.BOFDu')
-            User user = systemActor.createNewUser(restTemplate, request)
+        given: 'a username and password'
+            def username = UUID.randomUUID().toString()
+            def password = 'password'
 
-        when: 'user tries to authenticate'
-            AuthenticationRequestDto dto = new AuthenticationRequestDto(username: user.username, password: 'password')
-            def cookieHeader = userActor.authenticateAndGetAccessToken(restTemplate, dto).headers['Set-Cookie']
+        when: 'a user tries to authenticate and get an access token for subsequent calls'
+            UserCreationRequestDto request = createUserRequest(username, password)
+            User user = systemActor.createNewUser(restTemplate, request)
+            def userAgent = 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0'
+            def cookieWithAccessToken = createAccessTokenForUser(userAgent, username, password)
 
         then: 'user receives access and refresh token in the cookie header'
-            with(cookieHeader) {
+            with(cookieWithAccessToken) {
                 size() == 2
                 it[0].contains('accessToken=')
                 it[1].contains('refreshToken=')
             }
 
         and: 'access and refresh token are valid'
-            verifyToken(cookieHeader[0].split(';')[0].replace('accessToken=', ''))
-            verifyToken(cookieHeader[1].split(';')[0].replace('refreshToken=', ''))
+            verifyToken(cookieWithAccessToken[0].split(';')[0].replace('accessToken=', ''))
+            verifyToken(cookieWithAccessToken[1].split(';')[0].replace('refreshToken=', ''))
     }
 
+    @Unroll
+    def "user tries to authenticate but passes wrong credentials and error is thrown"() {
+        given: 'a user with certain username and password'
+            def username = UUID.randomUUID().toString()
+            def password = 'password'
+            def userAgent = 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0'
+            UserCreationRequestDto request = createUserRequest(username, password)
+            systemActor.createNewUser(restTemplate, request)
+
+        when: 'user tries to authenticate'
+            def response = userActor.authenticateAndGetAccessToken(restTemplate, new AuthenticationRequestDto(username: user, password: pass), userAgent)
+
+        then: 'unauthorized exception is thrown'
+            response.rawHttpStatus == 401
+
+        where:
+            user          | pass
+            'wrong-user'  | 'password'
+            'username'    | 'wrong-pass'
+    }
 }

@@ -10,18 +10,18 @@ import org.springframework.web.client.RestTemplate
 
 trait UserActions {
 
-    def saveReview(RestTemplate restTemplate, Review reviewDto) {
-        Request request = new SaveReviewRequest(restTemplate, reviewDto)
+    def saveReview(RestTemplate restTemplate, Review reviewDto, def cookie, String userAgent) {
+        Request request = new SaveReviewRequest(restTemplate, reviewDto, cookie, userAgent)
         request.execute()
     }
 
-    def getUnitsPagedBySearchValue(RestTemplate restTemplate, String searchValue, Integer page, Integer pageSize) {
-        Request request = new GetUnitsBySearchValueRequest(restTemplate, searchValue, page, pageSize)
+    def getUnitsPagedBySearchValue(RestTemplate restTemplate, String searchValue, Integer page, Integer pageSize, def cookie, String userAgent) {
+        Request request = new GetUnitsBySearchValueRequest(restTemplate, searchValue, page, pageSize, cookie, userAgent)
         request.execute()
     }
 
-    def authenticateAndGetAccessToken(RestTemplate restTemplate, AuthenticationRequestDto authenticationRequestDto) {
-        Request request = new AuthenticateAndGetAccessTokenRequest(restTemplate, authenticationRequestDto)
+    def authenticateAndGetAccessToken(RestTemplate restTemplate, AuthenticationRequestDto authenticationRequestDto, String userAgent) {
+        Request request = new AuthenticateAndGetAccessTokenRequest(restTemplate, authenticationRequestDto, userAgent)
         request.execute()
     }
 }

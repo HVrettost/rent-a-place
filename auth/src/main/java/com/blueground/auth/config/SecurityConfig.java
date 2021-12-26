@@ -1,6 +1,5 @@
 package com.blueground.auth.config;
 
-import com.blueground.auth.config.properties.SecurityConfigProperties;
 import com.blueground.auth.filter.AuthorizationFilter;
 import com.blueground.auth.jwt.utils.JwtClaimUtils;
 import com.blueground.auth.jwt.validator.JwtValidator;
@@ -32,6 +31,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
     private static final String AUTH_TEST_ENDPOINTS_WILDCARD_URI = "marsrental/test/**";
     private static final String AUTH_REFRESH_TOKEN_URI = "marsrental/v1/auth/token/refresh";
     private static final String AUTH_REFRESH_TOKEN_ALL_URI = "marsrental/v1/auth/token/all";
+    private static final String GET_UNITS_BY_SEARCH_VALUE_URI = "marsrental/v1/units";
+    private static final String SAVE_REVIEW_URI = "marsrental/v1/reviews";
 
     private final UserDetailsService userDetailsService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -39,7 +40,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
     private final JwtValidator jwtValidator;
     private final ObjectMapper objectMapper;
     private final HeaderUtils headerUtils;
-    private final SecurityConfigProperties securityConfigProperties;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -49,26 +49,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
                 .antMatchers(HttpMethod.POST, AUTH_TEST_ENDPOINTS_WILDCARD_URI).permitAll()
                 .antMatchers(HttpMethod.DELETE, AUTH_TEST_ENDPOINTS_WILDCARD_URI).permitAll()
                 .antMatchers(HttpMethod.GET, AUTH_TEST_ENDPOINTS_WILDCARD_URI).permitAll()
-                //.antMatchers(HttpMethod.DELETE, AUTH_ACCESS_TOKEN_URI).permitAll()
-                //.antMatchers(HttpMethod.PUT, AUTH_REFRESH_TOKEN_URI).permitAll()
-                //.antMatchers(HttpMethod.DELETE, AUTH_REFRESH_TOKEN_ALL_URI).permitAll()
-                //.antMatchers(HttpMethod.OPTIONS, AUTH_ACCESS_TOKEN_URI).permitAll()
-                //.antMatchers(HttpMethod.OPTIONS, AUTH_REFRESH_TOKEN_URI).permitAll()
-                //.antMatchers(HttpMethod.OPTIONS, AUTH_REFRESH_TOKEN_ALL_URI).permitAll()
-                .anyRequest().permitAll()
+                .antMatchers(HttpMethod.DELETE, AUTH_ACCESS_TOKEN_URI).permitAll()
+                .antMatchers(HttpMethod.PUT, AUTH_REFRESH_TOKEN_URI).permitAll()
+                .antMatchers(HttpMethod.DELETE, AUTH_REFRESH_TOKEN_ALL_URI).permitAll()
+                .antMatchers(HttpMethod.GET, GET_UNITS_BY_SEARCH_VALUE_URI).permitAll()
+                .antMatchers(HttpMethod.POST, SAVE_REVIEW_URI).permitAll()
                 .and()
                 .addFilterAfter(new AuthorizationFilter(jwtValidator, jwtClaimUtils, objectMapper, headerUtils), FilterSecurityInterceptor.class)
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
-/*
-    @Override
-    public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping(securityConfigProperties.getMapping())
-                .allowedOrigins(securityConfigProperties.getAllowedOrigins().toArray(String[]::new))
-                .allowedMethods(securityConfigProperties.getAllowedMethods().toArray(String[]::new))
-                .exposedHeaders(securityConfigProperties.getAllowedMethods().toArray(String[]::new))
-                .allowCredentials(true);
-    }*/
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {

@@ -17,7 +17,8 @@ public enum AuthorizationErrorCodes {
     AUTH_ROLE_FOR_GIVEN_USERNAME_NOT_FOUND(600, "Role not found for given username", HttpStatus.FORBIDDEN),
     USER_AGENT_NOT_FOUND(700, "Could not find user agent", HttpStatus.FORBIDDEN),
     TOKEN_COULD_NOT_BE_EXTRACTED(800, "Token could not be extracted from Cookie header", HttpStatus.FORBIDDEN),
-    GRANTED_AUTHORITIES_NOT_FOUND(900, "Could not find granted authorities for user", HttpStatus.FORBIDDEN);
+    GRANTED_AUTHORITIES_NOT_FOUND(900, "Could not find granted authorities for user", HttpStatus.FORBIDDEN),
+    AUTH_ROLE_NOT_FOUND_FOR_GIVEN_VALUE(1000, "Could not find role for given value", HttpStatus.CONFLICT);
 
     private final int applicationErrorCode;
     private final String description;

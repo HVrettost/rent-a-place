@@ -7,12 +7,12 @@ import com.blueground.auth.exception.AuthorizationException;
 import com.blueground.auth.exception.error.AuthorizationErrorCodes;
 import com.blueground.auth.jwt.utils.JwtClaimUtils;
 import com.blueground.auth.jwt.utils.JwtGeneratorUtils;
-import com.blueground.auth.model.entity.RefreshTokenWhitelist;
 import com.blueground.auth.utils.CookieUtils;
 import com.blueground.auth.utils.HeaderUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -29,6 +29,7 @@ public class DefaultAuthTokenService implements AuthTokenService {
     private final AuthRoleToPermissionsDao authRoleToPermissionsDao;
 
     @Override
+    @Transactional
     public HttpHeaders createCookieHeadersForAuthorization(HttpServletRequest httpServletRequest, String username) throws AuthorizationException {
         String userAgent = headerUtils.extractUserAgent(httpServletRequest);
         String permissions = getUserPermissions(username);

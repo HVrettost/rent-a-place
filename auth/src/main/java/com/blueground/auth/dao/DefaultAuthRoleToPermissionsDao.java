@@ -6,19 +6,15 @@ import com.blueground.auth.exception.error.AuthorizationErrorCodes;
 import com.blueground.auth.mapper.AuthRoleToAuthoritiesMapper;
 import com.blueground.auth.model.entity.AuthRoleToAuthorities;
 import com.blueground.auth.repository.AuthRoleToAuthoritiesRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
+@RequiredArgsConstructor
 public class DefaultAuthRoleToPermissionsDao implements AuthRoleToPermissionsDao {
 
     private final AuthRoleToAuthoritiesRepository authRoleToAuthoritiesRepository;
     private final AuthRoleToAuthoritiesMapper authRoleToAuthoritiesMapper;
-
-    public DefaultAuthRoleToPermissionsDao(AuthRoleToAuthoritiesRepository authRoleToAuthoritiesRepository,
-                                           AuthRoleToAuthoritiesMapper authRoleToAuthoritiesMapper) {
-        this.authRoleToAuthoritiesRepository = authRoleToAuthoritiesRepository;
-        this.authRoleToAuthoritiesMapper = authRoleToAuthoritiesMapper;
-    }
 
     @Override
     public AuthRoleToAuthoritiesDomain getPermissionsByAuthRole(String authRole) throws AuthorizationException {

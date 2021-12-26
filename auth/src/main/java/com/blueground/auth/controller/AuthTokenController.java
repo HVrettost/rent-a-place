@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.blueground.auth.exception.AuthenticationException;
 import com.blueground.auth.exception.AuthorizationException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,16 +16,11 @@ import com.blueground.auth.service.AuthTokenService;
 import com.blueground.auth.service.AuthenticationService;
 
 @RestController
+@RequiredArgsConstructor
 public class AuthTokenController implements AuthTokenApi {
 
     private final AuthenticationService authenticationService;
     private final AuthTokenService authTokenService;
-
-    public AuthTokenController(AuthenticationService authenticationService,
-                               AuthTokenService authTokenService) {
-        this.authenticationService = authenticationService;
-        this.authTokenService = authTokenService;
-    }
 
     @Override
     public ResponseEntity<Void> generateAccessToken(HttpServletRequest httpServletRequest,

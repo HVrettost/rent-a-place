@@ -9,5 +9,6 @@ dependencies {
     implementation project(':reviews')
     implementation project(':units')
     implementation project(':users')
+    implementation project(':auth')
 }
 

@@ -6,4 +6,5 @@ include 'application'
 include 'functional-tests'
 include 'test-api'
 include 'auth'
+include 'common'
 

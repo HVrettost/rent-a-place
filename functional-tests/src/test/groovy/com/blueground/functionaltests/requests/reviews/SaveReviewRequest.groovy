@@ -1,9 +1,8 @@
 package com.blueground.functionaltests.requests.reviews
 
-
+import com.blueground.functionaltests.domain.Review
 import com.blueground.functionaltests.exception.HttpErrorResponse
 import com.blueground.functionaltests.requests.Request
-import com.blueground.functionaltests.domain.Review
 import org.springframework.web.client.HttpClientErrorException
 import org.springframework.web.client.HttpServerErrorException
 import org.springframework.web.client.RestTemplate

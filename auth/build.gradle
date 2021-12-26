@@ -5,6 +5,10 @@ bootJar {
     enabled = false
 }
 dependencies {
+
+    implementation project(':common')
+    implementation project(':users')
+
     implementation 'com.auth0:java-jwt:3.18.2'
     implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
 }

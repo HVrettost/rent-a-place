@@ -1,6 +1,5 @@
 package com.blueground.functionaltests.requests.units
 
-
 import com.blueground.functionaltests.domain.Unit
 import com.blueground.functionaltests.exception.HttpErrorResponse
 import com.blueground.functionaltests.requests.Request

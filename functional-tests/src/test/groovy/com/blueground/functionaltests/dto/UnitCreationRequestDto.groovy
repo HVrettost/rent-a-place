@@ -12,10 +12,6 @@ class UnitCreationRequestDto {
         this.price = price
     }
 
-    UnitCreationRequestDto() {
-
-    }
-
     String getRegion() {
         this.region
     }

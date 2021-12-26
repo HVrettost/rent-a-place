@@ -1,10 +1,10 @@
 package com.blueground.functionaltests.config
 
-
 import com.blueground.functionaltests.actors.SystemActor
 import com.blueground.functionaltests.actors.UserActor
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.springframework.web.client.RestTemplate
+
 import spock.lang.Shared
 import spock.lang.Specification
 

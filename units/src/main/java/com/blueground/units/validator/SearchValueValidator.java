@@ -1,6 +1,5 @@
 package com.blueground.units.validator;
 
-import com.blueground.units.exception.utils.UnitsExceptionUtils;
 import com.blueground.units.exception.UnitsException;
 import com.blueground.units.exception.error.UnitsErrorCodes;
 import org.springframework.stereotype.Component;
@@ -12,6 +11,6 @@ public class SearchValueValidator implements Validator<String> {
     @Override
     public void validate(String value) throws UnitsException {
         if (!StringUtils.hasText(value))
-            throw new UnitsException(UnitsExceptionUtils.createErrorDetails(UnitsErrorCodes.EMPTY_SEARCH_VALUE));
+            throw new UnitsException(UnitsErrorCodes.EMPTY_SEARCH_VALUE);
     }
 }

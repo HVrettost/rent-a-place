@@ -1,12 +1,14 @@
 package com.blueground.functionaltests.actions
 
 import com.blueground.functionaltests.dto.UnitCreationRequestDto
-import com.blueground.functionaltests.requests.units.DeleteAllUnitsRequest
-import com.blueground.functionaltests.requests.reviews.GetReviewsByUnitIdRequest
+import com.blueground.functionaltests.dto.UserCreationRequestDto
 import com.blueground.functionaltests.requests.Request
+import com.blueground.functionaltests.requests.reviews.GetReviewsByUnitIdRequest
 import com.blueground.functionaltests.requests.units.CreateNewUnitRequest
+import com.blueground.functionaltests.requests.units.DeleteAllUnitsRequest
 import com.blueground.functionaltests.requests.units.GetUnitAverageScoreRequest
 import com.blueground.functionaltests.requests.users.CreateNewUserRequest
+import com.blueground.functionaltests.requests.users.DeleteAllUsersRequest
 import org.springframework.web.client.RestTemplate
 
 trait SystemActions {
@@ -16,8 +18,8 @@ trait SystemActions {
         request.execute()
     }
 
-    def createNewUser(RestTemplate restTemplate) {
-        Request request = new CreateNewUserRequest(restTemplate)
+    def createNewUser(RestTemplate restTemplate, UserCreationRequestDto dto) {
+        Request request = new CreateNewUserRequest(restTemplate, dto)
         request.execute()
     }
 
@@ -33,6 +35,11 @@ trait SystemActions {
 
     def deleteAllUnitsFromDatabase(RestTemplate restTemplate) {
         Request request = new DeleteAllUnitsRequest(restTemplate)
+        request.execute()
+    }
+
+    def deleteAllUsersFromDatabase(RestTemplate restTemplate) {
+        Request request = new DeleteAllUsersRequest(restTemplate)
         request.execute()
     }
 }

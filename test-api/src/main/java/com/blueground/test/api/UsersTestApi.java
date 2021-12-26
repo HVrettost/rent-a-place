@@ -1,18 +1,21 @@
 package com.blueground.test.api;
 
-import com.blueground.users.User;
+import com.blueground.test.dto.UserCreationRequestDto;
+import com.blueground.users.model.entity.User;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@RequestMapping(value = "marsrental/v1/test")
+@RequestMapping(value = "marsrental/test/v1/users")
 public interface UsersTestApi {
 
-    @PostMapping(value = "users",
-            produces = MediaType.APPLICATION_JSON_VALUE,
+    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<User> createNewUser();
+    ResponseEntity<User> createNewUser(@RequestBody UserCreationRequestDto requestDto);
 
-    @GetMapping(value = "users/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<User> getUser(@PathVariable(value = "userId") String userId);
+
+    @DeleteMapping(value = "all", produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<Void> deleteAllUsers();
 }

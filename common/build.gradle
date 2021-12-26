@@ -1,3 +1,7 @@
 group 'com.blueground.common'
 version '1.0'
 
+bootJar {
+    enabled = false
+}
+

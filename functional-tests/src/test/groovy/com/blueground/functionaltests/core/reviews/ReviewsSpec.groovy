@@ -1,16 +1,18 @@
 package com.blueground.functionaltests.core.reviews
 
 import com.blueground.functionaltests.config.MarsRentalFTSetup
-import com.blueground.functionaltests.dto.UnitCreationRequestDto
-import com.blueground.functionaltests.exception.ErrorDetails
-import com.blueground.functionaltests.exception.HttpErrorResponse
 import com.blueground.functionaltests.domain.Review
 import com.blueground.functionaltests.domain.Unit
 import com.blueground.functionaltests.domain.User
+import com.blueground.functionaltests.dto.UnitCreationRequestDto
+import com.blueground.functionaltests.dto.UserCreationRequestDto
+import com.blueground.functionaltests.exception.ErrorDetails
+import com.blueground.functionaltests.exception.HttpErrorResponse
 import com.blueground.functionaltests.exception.ReviewsErrorCodes
+import com.blueground.functionaltests.utils.UserUtils
 import spock.lang.Unroll
 
-class ReviewsSpec extends MarsRentalFTSetup {
+class ReviewsSpec extends MarsRentalFTSetup implements UserUtils {
 
     def cleanupSpec() {
         systemActor.deleteAllUnitsFromDatabase(restTemplate)
@@ -70,7 +72,8 @@ class ReviewsSpec extends MarsRentalFTSetup {
 
     def "should return exception if user tries to add review for the second time for the same unit"() {
         given: 'a user'
-            User user = systemActor.createNewUser(restTemplate)
+            UserCreationRequestDto request = createUserRequest('username', 'encrypted-pass')
+            User user = systemActor.createNewUser(restTemplate, request)
 
         and: 'a unit'
             Unit unit = systemActor.createNewUnit(restTemplate, new UnitCreationRequestDto('region', 'title', new BigDecimal("500")))
@@ -102,9 +105,12 @@ class ReviewsSpec extends MarsRentalFTSetup {
 
     def "should calculate average score correctly after more than one users have reviewed the same unit"() {
         given: 'three users'
-            User user1 = systemActor.createNewUser(restTemplate)
-            User user2 = systemActor.createNewUser(restTemplate)
-            User user3 = systemActor.createNewUser(restTemplate)
+            UserCreationRequestDto request1 = createUserRequest('username', 'encrypted-pass')
+            UserCreationRequestDto request2 = createUserRequest('username2', 'encrypted-pass')
+            UserCreationRequestDto request3 = createUserRequest('username3', 'encrypted-pass')
+            User user1 = systemActor.createNewUser(restTemplate, request1)
+            User user2 = systemActor.createNewUser(restTemplate, request2)
+            User user3 = systemActor.createNewUser(restTemplate, request3)
 
         and: 'a unit'
             Unit unit = systemActor.createNewUnit(restTemplate, new UnitCreationRequestDto('region', 'title', new BigDecimal("500")))
@@ -125,4 +131,5 @@ class ReviewsSpec extends MarsRentalFTSetup {
         and: 'total reviews number in the database for the unit is 3'
             systemActor.getReviewsByUnitId(restTemplate, unit.unitId).length == 3
     }
+
 }

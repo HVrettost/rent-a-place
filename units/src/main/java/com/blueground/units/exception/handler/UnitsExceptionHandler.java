@@ -1,8 +1,8 @@
 package com.blueground.units.exception.handler;
 
+import com.blueground.common.exception.error.ErrorDetails;
 import com.blueground.units.exception.UnitsException;
 import com.blueground.units.exception.error.UnitsErrorCodes;
-import com.blueground.units.exception.error.UnitsErrorDetails;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -13,19 +13,22 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class UnitsExceptionHandler {
 
     @ExceptionHandler(value = UnitsException.class)
-    public ResponseEntity<UnitsErrorDetails> handleReviewsException(UnitsException uex) {
-        return new ResponseEntity<>(uex.getErrorDetails(), uex.getErrorDetails().getHttpStatus());
+    public ResponseEntity<ErrorDetails> handleReviewsException(UnitsException uex) {
+        return new ResponseEntity<>(createErrorDetails(uex.getUnitsErrorCodes()), uex.getUnitsErrorCodes().getHttpStatus());
     }
 
     @ExceptionHandler(value = Exception.class)
-    public ResponseEntity<UnitsErrorDetails> handleGenericException(Exception ex) {
+    public ResponseEntity<ErrorDetails> handleGenericException(Exception ex) {
         log.error("A serious problem occurred: {}", ex.getMessage(), ex);
 
         return new ResponseEntity<>(
-                new UnitsErrorDetails(
+                new ErrorDetails(
                         UnitsErrorCodes.GENERIC_UNITS_ERROR.getApplicationErrorCode(),
-                        UnitsErrorCodes.GENERIC_UNITS_ERROR.getDescription(),
-                        UnitsErrorCodes.GENERIC_UNITS_ERROR.getHttpStatus()),
-                UnitsErrorCodes.GENERIC_UNITS_ERROR.getHttpStatus());
+                        UnitsErrorCodes.GENERIC_UNITS_ERROR.getDescription()),
+                        UnitsErrorCodes.GENERIC_UNITS_ERROR.getHttpStatus());
+    }
+
+    public ErrorDetails createErrorDetails(UnitsErrorCodes error) {
+        return new ErrorDetails(error.getApplicationErrorCode(), error.getDescription());
     }
 }

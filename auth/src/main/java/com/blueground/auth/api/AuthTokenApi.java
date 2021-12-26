@@ -1,5 +1,7 @@
 package com.blueground.auth.api;
 
+import com.blueground.auth.exception.AuthenticationException;
+import com.blueground.auth.exception.AuthorizationException;
 import com.blueground.auth.model.dto.AuthenticationRequestDto;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -12,25 +14,26 @@ import javax.servlet.http.HttpServletRequest;
 public interface AuthTokenApi {
 
 
-    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE,
+    @PostMapping(value = "access",
+            produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<Void> generateAccessToken(HttpServletRequest httpServletRequest,
-                                             @RequestBody AuthenticationRequestDto authenticationRequest);
+                                             @RequestBody AuthenticationRequestDto authenticationRequest) throws AuthenticationException, AuthorizationException;
 
-    @PutMapping(value = "/refresh",
+    @PutMapping(value = "refresh",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<Void> updateAccessToken(HttpServletRequest httpServletRequest);
+    ResponseEntity<Void> updateAccessToken(HttpServletRequest httpServletRequest) throws AuthorizationException;
 
     @PreAuthorize("hasAuthority('REFRESH_TOKEN_DELETE')")
     @DeleteMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<Void> invalidateRefreshToken(HttpServletRequest httpServletRequest);
+    ResponseEntity<Void> invalidateRefreshToken(HttpServletRequest httpServletRequest) throws AuthorizationException;
 
     @PreAuthorize("hasAuthority('REFRESH_TOKEN_ALL_DELETE')")
     @DeleteMapping(value = "/all",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<Void> invalidateRefreshTokensByUsername(HttpServletRequest httpServletRequest);
+    ResponseEntity<Void> invalidateRefreshTokensByUsername(HttpServletRequest httpServletRequest) throws AuthorizationException;
 
 }

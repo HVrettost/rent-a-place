@@ -1,17 +1,18 @@
 package com.blueground.functionaltests.core.units
 
-
 import com.blueground.functionaltests.config.MarsRentalFTSetup
 import com.blueground.functionaltests.domain.Review
 import com.blueground.functionaltests.domain.Unit
 import com.blueground.functionaltests.domain.User
 import com.blueground.functionaltests.dto.UnitCreationRequestDto
+import com.blueground.functionaltests.dto.UserCreationRequestDto
 import com.blueground.functionaltests.exception.ErrorDetails
 import com.blueground.functionaltests.exception.HttpErrorResponse
 import com.blueground.functionaltests.exception.UnitsErrorCodes
+import com.blueground.functionaltests.utils.UserUtils
 import spock.lang.Unroll
 
-class UnitsSpec extends MarsRentalFTSetup {
+class UnitsSpec extends MarsRentalFTSetup implements UserUtils {
 
     def cleanup() {
         systemActor.deleteAllUnitsFromDatabase(restTemplate)
@@ -68,7 +69,8 @@ class UnitsSpec extends MarsRentalFTSetup {
             Unit unit7 = systemActor.createNewUnit(restTemplate, new UnitCreationRequestDto('Athens', 'Kolonaki Avenue', new BigDecimal("1299")))
 
         and: 'a user'
-            User user = systemActor.createNewUser(restTemplate)
+            UserCreationRequestDto request = createUserRequest('username', 'encrypted-pass')
+            User user = systemActor.createNewUser(restTemplate, request)
 
         and: 'reviews are done in some of the units from the user'
             userActor.saveReview(restTemplate, new Review(score: 4, unitId: unit1.unitId, comment: 'comment 1', userId: user.userId))
@@ -131,7 +133,8 @@ class UnitsSpec extends MarsRentalFTSetup {
             Unit unit7 = systemActor.createNewUnit(restTemplate, new UnitCreationRequestDto('Athens', 'Kolonaki Majestic Avenue', new BigDecimal("1299")))
 
         and: 'a user'
-            User user = systemActor.createNewUser(restTemplate)
+            UserCreationRequestDto request = createUserRequest('username', 'encrypted-pass')
+            User user = systemActor.createNewUser(restTemplate, request)
 
         and: 'reviews are done in some of the units from the user'
             userActor.saveReview(restTemplate, new Review(score: 4, unitId: unit1.unitId, comment: 'comment 1', userId: user.userId))

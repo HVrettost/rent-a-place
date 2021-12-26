@@ -1,6 +1,5 @@
 package com.blueground.functionaltests.requests.reviews
 
-
 import com.blueground.functionaltests.domain.Review
 import com.blueground.functionaltests.exception.HttpErrorResponse
 import com.blueground.functionaltests.requests.Request
@@ -11,7 +10,7 @@ import org.springframework.web.client.RestTemplate
 class GetReviewsByUnitIdRequest implements Request {
 
     private RestTemplate restTemplate
-    private String url = '%s/marsrental/v1/test/reviews?unitId=%s'
+    private String url = '%s/marsrental/test/v1/reviews?unitId=%s'
 
     GetReviewsByUnitIdRequest(RestTemplate restTemplate, UUID unitId) {
         this.restTemplate = restTemplate

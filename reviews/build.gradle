@@ -7,4 +7,5 @@ bootJar {
 
 dependencies {
     implementation project(':units')
+    implementation project(':common')
 }

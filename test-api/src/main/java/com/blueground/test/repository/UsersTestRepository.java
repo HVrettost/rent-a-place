@@ -1,6 +1,6 @@
 package com.blueground.test.repository;
 
-import com.blueground.users.User;
+import com.blueground.users.model.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

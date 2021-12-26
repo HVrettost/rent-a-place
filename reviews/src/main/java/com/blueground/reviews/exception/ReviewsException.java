@@ -1,5 +1,6 @@
 package com.blueground.reviews.exception;
 
+import com.blueground.reviews.exception.error.ReviewsErrorCodes;
 import com.blueground.reviews.exception.error.ReviewsErrorDetails;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -8,5 +9,5 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ReviewsException extends Exception {
 
-    private final ReviewsErrorDetails errorDetails;
+    private final ReviewsErrorCodes reviewsErrorCodes;
 }

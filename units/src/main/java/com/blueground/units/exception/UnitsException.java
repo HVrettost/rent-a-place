@@ -1,6 +1,6 @@
 package com.blueground.units.exception;
 
-import com.blueground.units.exception.error.UnitsErrorDetails;
+import com.blueground.units.exception.error.UnitsErrorCodes;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
@@ -8,5 +8,5 @@ import lombok.RequiredArgsConstructor;
 @Getter
 public class UnitsException extends Exception {
 
-    private final UnitsErrorDetails errorDetails;
+    private final UnitsErrorCodes unitsErrorCodes;
 }

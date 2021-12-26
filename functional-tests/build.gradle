@@ -11,5 +11,9 @@ task runFunctionalTests(type: Test) {
     failFast = true
 }
 
+dependencies {
+    implementation 'com.auth0:java-jwt:3.18.2'
+}
+
 
 

@@ -6,7 +6,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@RequestMapping(value = "marsrental/v1/test")
+@RequestMapping(value = "marsrental/test/v1")
 public interface UnitsTestApi {
 
     @DeleteMapping(value = "units/all", produces = MediaType.APPLICATION_JSON_VALUE)

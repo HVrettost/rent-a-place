@@ -1,6 +1,6 @@
 package com.blueground.auth.dao;
 
-import com.blueground.auth.mapper.RefreshTokenWhitelistMapper;
+import com.blueground.auth.converter.RefreshTokenWhitelistConverter;
 import com.blueground.auth.model.entity.RefreshTokenWhitelist;
 import com.blueground.auth.repository.AuthTokenRepository;
 import lombok.RequiredArgsConstructor;
@@ -11,11 +11,11 @@ import org.springframework.stereotype.Component;
 public class DefaultRefreshTokenWhitelistDao implements RefreshTokenWhitelistDao {
 
     private final AuthTokenRepository authTokenRepository;
-    private final RefreshTokenWhitelistMapper refreshTokenWhitelistMapper;
+    private final RefreshTokenWhitelistConverter refreshTokenWhitelistMapper;
 
     @Override
     public void saveRefreshToken(String refreshToken, String username, String userAgent) {
-        RefreshTokenWhitelist refreshTokenWhitelist = refreshTokenWhitelistMapper.toEntity(refreshToken, username, userAgent);
+        RefreshTokenWhitelist refreshTokenWhitelist = refreshTokenWhitelistMapper.convert(refreshToken, username, userAgent);
         authTokenRepository.save(refreshTokenWhitelist);
     }
 

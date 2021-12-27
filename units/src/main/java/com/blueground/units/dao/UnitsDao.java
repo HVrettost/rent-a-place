@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface UnitsDao {
 
-    List<UnitDto> getUnitsBySearchValueThatMatchesRegionAndTitle(String searchValue, PageReq pageRequest);
+    List<UnitDto> getUnitsBySearchValueFromTokens(String searchValue, PageReq pageRequest);
 }

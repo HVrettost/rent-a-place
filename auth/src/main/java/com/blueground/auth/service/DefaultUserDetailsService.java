@@ -2,7 +2,7 @@ package com.blueground.auth.service;
 
 import com.blueground.users.dao.UsersDao;
 import com.blueground.users.exception.UsersException;
-import com.blueground.users.model.dto.UserDto;
+import com.blueground.users.model.domain.UserDomain;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,7 +21,8 @@ public class DefaultUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         try {
-            UserDto user = usersDao.getUserByUsername(username);
+            UserDomain user = usersDao.getUserByUsername(username);
+
             return new User(user.getUsername(), user.getPassword(), Collections.emptyList());
         } catch (UsersException ex) {
             throw new UsernameNotFoundException("Could not find user with username: " + username);

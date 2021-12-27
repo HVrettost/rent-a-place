@@ -27,7 +27,7 @@ public class UnitsController implements UnitsApi {
         searchValueValidator.validate(searchValue);
         PageReq pageRequest = createPageRequest(page, pageSize);
         pageRequestValidator.validate(pageRequest);
-        List<UnitDto> units = unitsService.getUnitsBySearchValue(searchValue, pageRequest);
+        List<UnitDto> units = unitsService.getUnitsByTitleAnRegion(searchValue, pageRequest);
 
         return new ResponseEntity<>(units, HttpStatus.OK);
     }

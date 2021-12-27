@@ -14,6 +14,7 @@ public class UnitsExceptionHandler {
 
     @ExceptionHandler(value = UnitsException.class)
     public ResponseEntity<ErrorDetails> handleReviewsException(UnitsException uex) {
+        log.error("An error occurred with message: " + uex.getUnitsErrorCodes().getDescription(), uex);
         return new ResponseEntity<>(createErrorDetails(uex.getUnitsErrorCodes()), uex.getUnitsErrorCodes().getHttpStatus());
     }
 
@@ -22,10 +23,8 @@ public class UnitsExceptionHandler {
         log.error("A serious problem occurred: {}", ex.getMessage(), ex);
 
         return new ResponseEntity<>(
-                new ErrorDetails(
-                        UnitsErrorCodes.GENERIC_UNITS_ERROR.getApplicationErrorCode(),
-                        UnitsErrorCodes.GENERIC_UNITS_ERROR.getDescription()),
-                        UnitsErrorCodes.GENERIC_UNITS_ERROR.getHttpStatus());
+                createErrorDetails(UnitsErrorCodes.GENERIC_UNITS_ERROR),
+                UnitsErrorCodes.GENERIC_UNITS_ERROR.getHttpStatus());
     }
 
     public ErrorDetails createErrorDetails(UnitsErrorCodes error) {

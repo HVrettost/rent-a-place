@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface UnitsService {
 
-    List<UnitDto> getUnitsBySearchValue(String searchValue, PageReq pageRequest);
+    List<UnitDto> getUnitsByTitleAnRegion(String searchValue, PageReq pageRequest);
 }

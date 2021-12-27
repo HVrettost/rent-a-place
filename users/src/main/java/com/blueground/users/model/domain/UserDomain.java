@@ -1,4 +1,4 @@
-package com.blueground.users.model.dto;
+package com.blueground.users.model.domain;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -7,7 +7,7 @@ import java.util.UUID;
 
 @Getter
 @Setter
-public class UserDto {
+public class UserDomain {
 
     private UUID userId;
     private String name;

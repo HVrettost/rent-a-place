@@ -3,6 +3,7 @@ package com.blueground.auth.exception.handler;
 import com.blueground.auth.exception.AuthenticationException;
 import com.blueground.auth.exception.AuthorizationException;
 import com.blueground.auth.exception.error.AuthenticationErrorCodes;
+import com.blueground.auth.exception.error.AuthorizationErrorCodes;
 import com.blueground.common.exception.error.ErrorDetails;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -15,24 +16,35 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice(value = "com.blueground.auth.controller")
 public class AuthExceptionHandler {
 
-    @ExceptionHandler({ AuthenticationException.class, AuthorizationException.class})
-    public ResponseEntity<ErrorDetails> handleAuthenticationException(AuthenticationException rex) {
-        return new ResponseEntity<>(createErrorDetails(rex.getAuthenticationErrorCodes()), rex.getAuthenticationErrorCodes().getHttpStatus());
+    @ExceptionHandler(AuthenticationException.class)
+    public ResponseEntity<ErrorDetails> handleAuthenticationException(AuthenticationException authenticationEx) {
+        log.error("An error occurred with message: {}", authenticationEx.getAuthenticationErrorCodes().getDescription(), authenticationEx);
+        return new ResponseEntity<>(createErrorDetails(authenticationEx.getAuthenticationErrorCodes()), authenticationEx.getAuthenticationErrorCodes().getHttpStatus());
+    }
+
+    @ExceptionHandler(AuthorizationException.class)
+    public ResponseEntity<ErrorDetails> handleAuthorizationException(AuthorizationException authorizationEx) {
+        log.error("An error occurred with message: {}", authorizationEx.getAuthorizationErrorCodes().getDescription(), authorizationEx);
+        return new ResponseEntity<>(createErrorDetails(authorizationEx.getAuthorizationErrorCodes()), authorizationEx.getAuthorizationErrorCodes().getHttpStatus());
     }
 
     @ExceptionHandler({ BadCredentialsException.class, UsernameNotFoundException.class })
     public ResponseEntity<ErrorDetails> handleBadCredentialsException(BadCredentialsException bcex) {
-        log.error(bcex.getMessage(), bcex);
+        log.error("An error occurred with message: {}", bcex.getMessage(), bcex);
         return new ResponseEntity<>(createErrorDetails(AuthenticationErrorCodes.BAD_CREDENTIALS), AuthenticationErrorCodes.BAD_CREDENTIALS.getHttpStatus());
     }
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorDetails> handleException(Exception ex) {
-        log.error(ex.getMessage(), ex);
+        log.error("An error occurred with message: {}", ex.getMessage(), ex);
         return new ResponseEntity<>(createErrorDetails(AuthenticationErrorCodes.GENERIC_AUTHENTICATION_ERROR), AuthenticationErrorCodes.GENERIC_AUTHENTICATION_ERROR.getHttpStatus());
     }
 
     public ErrorDetails createErrorDetails(AuthenticationErrorCodes error) {
+        return new ErrorDetails(error.getApplicationErrorCode(), error.getDescription());
+    }
+
+    public ErrorDetails createErrorDetails(AuthorizationErrorCodes error) {
         return new ErrorDetails(error.getApplicationErrorCode(), error.getDescription());
     }
 }

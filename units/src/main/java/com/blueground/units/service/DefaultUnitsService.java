@@ -17,9 +17,9 @@ public class DefaultUnitsService implements UnitsService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<UnitDto> getUnitsBySearchValue(String searchValue, PageReq pageRequest) {
+    public List<UnitDto> getUnitsByTitleAnRegion(String searchValue, PageReq pageRequest) {
         String lowerCasedSearchValue = searchValue.toLowerCase();
 
-        return unitsDao.getUnitsBySearchValueThatMatchesRegionAndTitle(lowerCasedSearchValue, pageRequest);
+        return unitsDao.getUnitsBySearchValueFromTokens(lowerCasedSearchValue, pageRequest);
     }
 }

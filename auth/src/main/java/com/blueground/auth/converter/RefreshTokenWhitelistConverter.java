@@ -1,12 +1,12 @@
-package com.blueground.auth.mapper;
+package com.blueground.auth.converter;
 
 import com.blueground.auth.model.entity.RefreshTokenWhitelist;
 import org.springframework.stereotype.Component;
 
 @Component
-public class RefreshTokenWhitelistMapper {
+public class RefreshTokenWhitelistConverter {
 
-    public RefreshTokenWhitelist toEntity(String refreshToken, String username, String userAgent) {
+    public RefreshTokenWhitelist convert(String refreshToken, String username, String userAgent) {
         RefreshTokenWhitelist refreshTokenWhitelist = new RefreshTokenWhitelist();
         refreshTokenWhitelist.setUsername(username);
         refreshTokenWhitelist.setRefreshToken(refreshToken);

@@ -20,9 +20,8 @@ public class DefaultUnitsDao implements UnitsDao {
     private final UnitDtoConverter unitDtoConverter;
 
     @Override
-    public List<UnitDto> getUnitsBySearchValueThatMatchesRegionAndTitle(String searchValue, PageReq pageRequest) {
-        Pageable pageable = PageRequest.of(pageRequest.getPage(),
-                pageRequest.getPageSize());
+    public List<UnitDto> getUnitsBySearchValueFromTokens(String searchValue, PageReq pageRequest) {
+        Pageable pageable = PageRequest.of(pageRequest.getPage(), pageRequest.getPageSize());
         Slice<Unit> unitsPage =  unitsRepository.findUnitsByVectorizedValues(searchValue, pageable);
 
         return unitsPage.getContent()

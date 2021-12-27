@@ -31,21 +31,25 @@ public class DefaultReviewsDao implements ReviewsDao {
         try {
             checkIfReviewAlreadyExists(entity.getUnitId(), entity.getUserId());
             reviewsRepository.save(entity);
+        } catch (ReviewsException rex) {
+            throw rex;
         } catch (Exception ex) {
-            if (ex instanceof ReviewsException) {
-                throw ex;
-            }
-
             throw new ReviewsException(ReviewsErrorCodes.ERROR_REVIEW_SAVE);
+        }
+    }
+
+    private void checkIfReviewAlreadyExists(UUID unitId, UUID userId) throws ReviewsException {
+        if (reviewsRepository.existsByUnitIdAndUserId(unitId, userId)) {
+            throw new ReviewsException(ReviewsErrorCodes.REVIEW_ALREADY_EXISTS);
         }
     }
 
     @Override
     public Integer calculateReviewsAverageScoreForUnit(UUID unitId) throws ReviewsException {
-        Float decimalAverageScore = reviewsRepository.calculateUnitAverageScore(unitId)
+        Float averageScore = reviewsRepository.calculateUnitAverageScore(unitId)
                 .orElseThrow(() -> new ReviewsException(ReviewsErrorCodes.AVERAGE_SCORE_CALCULATION_INABILITY));
 
-        return Math.round(decimalAverageScore);
+        return Math.round(averageScore);
     }
 
     @Override
@@ -54,12 +58,6 @@ public class DefaultReviewsDao implements ReviewsDao {
             unitsRepository.updateUnitAverageScore(averageScore, unitId);
         } catch (Exception ex) {
             throw new UnitsException(UnitsErrorCodes.COULD_NOT_UPDATE_SCORE);
-        }
-    }
-
-    private void checkIfReviewAlreadyExists(UUID unitId, UUID userId) throws ReviewsException {
-        if (reviewsRepository.existsByUnitIdAndUserId(unitId, userId)) {
-            throw new ReviewsException(ReviewsErrorCodes.REVIEW_ALREADY_EXISTS);
         }
     }
 }

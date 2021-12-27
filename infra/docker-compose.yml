@@ -1,5 +1,16 @@
-version: '3.8'
+version: '3.9'
 services:
+  marsrental-application:
+    build: ../.
+    container_name: marsrental-application
+    links:
+      - marsrental-database
+    depends_on:
+      - marsrental-migration
+      - marsrental-database
+    ports:
+      - 8900:8900
+
   marsrental-database:
     image: postgres:14.1
     environment:

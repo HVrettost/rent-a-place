@@ -8,4 +8,5 @@ include 'test-api'
 include 'auth'
 include 'common'
 include 'code-quality'
+include 'infra'
 

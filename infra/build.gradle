@@ -1,0 +1,22 @@
+group 'com.blueground.infrastructure'
+version '1.0'
+
+bootJar {
+    enabled = false
+}
+
+task postgresStart(type: Exec) {
+    commandLine 'docker-compose', '-f', 'docker-compose.yml', 'up', '-d', 'marsrental-database'
+}
+
+task postgresStop(type: Exec) {
+    commandLine 'docker-compose', '-f', 'docker-compose.yml', 'rm', '--stop', '--force', '-v', 'marsrental-database'
+}
+
+task marsrentalStart(type: Exec) {
+    commandLine 'docker-compose', '-f', 'docker-compose.yml', 'up', 'marsrental-application'
+}
+
+task marsrentalStop(type: Exec) {
+    commandLine 'docker-compose', '-f', 'docker-compose.yml', 'rm', '--stop', '--force', '-v', 'marsrental-application'
+}

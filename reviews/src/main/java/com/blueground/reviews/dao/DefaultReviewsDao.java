@@ -8,7 +8,6 @@ import com.blueground.reviews.repository.ReviewsRepository;
 import com.blueground.units.exception.UnitsException;
 import com.blueground.units.exception.error.UnitsErrorCodes;
 import com.blueground.units.repository.UnitsRepository;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.convert.converter.Converter;
@@ -29,18 +28,9 @@ public class DefaultReviewsDao implements ReviewsDao {
     public void insertReviewInDatabase(ReviewDto review) throws ReviewsException {
         Review entity = reviewDtoConverter.convert(review);
         try {
-            checkIfReviewAlreadyExists(entity.getUnitId(), entity.getUserId());
             reviewsRepository.save(entity);
-        } catch (ReviewsException rex) {
-            throw rex;
         } catch (Exception ex) {
-            throw new ReviewsException(ReviewsErrorCodes.ERROR_REVIEW_SAVE);
-        }
-    }
-
-    private void checkIfReviewAlreadyExists(UUID unitId, UUID userId) throws ReviewsException {
-        if (reviewsRepository.existsByUnitIdAndUserId(unitId, userId)) {
-            throw new ReviewsException(ReviewsErrorCodes.REVIEW_ALREADY_EXISTS);
+            throw new ReviewsException(ReviewsErrorCodes.ERROR_REVIEW_SAVE, ex);
         }
     }
 

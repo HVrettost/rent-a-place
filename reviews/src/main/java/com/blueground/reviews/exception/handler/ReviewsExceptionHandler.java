@@ -6,6 +6,7 @@ import com.blueground.reviews.exception.error.ReviewsErrorCodes;
 import com.blueground.units.exception.UnitsException;
 import com.blueground.units.exception.error.UnitsErrorCodes;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -24,6 +25,18 @@ public class ReviewsExceptionHandler {
     public ResponseEntity<ErrorDetails> handleUnitsException(UnitsException uex) {
         log.error("An exception occurred with message: {}", uex.getUnitsErrorCodes().getDescription(), uex);
         return new ResponseEntity<>(createErrorDetails(uex.getUnitsErrorCodes()), uex.getUnitsErrorCodes().getHttpStatus());
+    }
+
+    @ExceptionHandler(value = DataIntegrityViolationException.class)
+    public ResponseEntity<ErrorDetails> handleDataIntegrityViolationExceptionException(DataIntegrityViolationException ex) {
+        log.error("An exception occurred with message: {}", ex.getMessage(), ex);
+        return new ResponseEntity<>(createErrorDetails(ReviewsErrorCodes.REVIEW_ALREADY_EXISTS), ReviewsErrorCodes.REVIEW_ALREADY_EXISTS.getHttpStatus());
+    }
+
+    @ExceptionHandler(value = Exception.class)
+    public ResponseEntity<ErrorDetails> handleException(Exception ex) {
+        log.error("An exception occurred with message: {}", ex.getMessage(), ex);
+        return new ResponseEntity<>(createErrorDetails(ReviewsErrorCodes.GENERIC_REVIEWS_ERROR), ReviewsErrorCodes.GENERIC_REVIEWS_ERROR.getHttpStatus());
     }
 
     public ErrorDetails createErrorDetails(ReviewsErrorCodes error) {

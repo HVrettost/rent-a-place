@@ -11,8 +11,6 @@ import java.util.UUID;
 @Repository
 public interface ReviewsRepository extends JpaRepository<Review, UUID> {
 
-    boolean existsByUnitIdAndUserId(UUID unitId, UUID userId);
-
     @Query(value = "SELECT AVG(SCORE) FROM MARSRENTAL.REVIEWS WHERE UNIT_ID = ?1", nativeQuery = true)
     Optional<Float> calculateUnitAverageScore(UUID unitId);
 }

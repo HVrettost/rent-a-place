@@ -1,5 +1,6 @@
 package com.blueground.units.validator;
 
+import com.blueground.common.validator.Validator;
 import com.blueground.units.exception.UnitsException;
 import com.blueground.units.exception.error.UnitsErrorCodes;
 import org.springframework.stereotype.Component;

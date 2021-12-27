@@ -9,12 +9,14 @@ import com.blueground.auth.jwt.utils.JwtClaimUtils;
 import com.blueground.auth.jwt.utils.JwtGeneratorUtils;
 import com.blueground.auth.utils.CookieUtils;
 import com.blueground.auth.utils.HeaderUtils;
+import com.blueground.common.exception.MarsRentalCoreException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.transaction.TransactionScoped;
 
 @Service
 @RequiredArgsConstructor
@@ -60,6 +62,7 @@ public class DefaultAuthTokenService implements AuthTokenService {
 
 
     @Override
+    @Transactional
     public HttpHeaders updateCookieHeaderForAccessToken(HttpServletRequest httpServletRequest) throws AuthorizationException {
         String refreshToken = headerUtils.extractRefreshToken(httpServletRequest);
         String username = jwtClaimUtils.extractSubjectClaim(refreshToken);
@@ -74,6 +77,7 @@ public class DefaultAuthTokenService implements AuthTokenService {
     }
 
     @Override
+    @Transactional
     public void invalidateRefreshToken(HttpServletRequest httpServletRequest) throws AuthorizationException {
         String accessToken = headerUtils.extractAccessToken(httpServletRequest);
         String userAgent = headerUtils.extractUserAgent(httpServletRequest);
@@ -87,6 +91,7 @@ public class DefaultAuthTokenService implements AuthTokenService {
     }
 
     @Override
+    @Transactional
     public void invalidateRefreshTokensByUsername(HttpServletRequest httpServletRequest) throws AuthorizationException {
         String accessToken = headerUtils.extractAccessToken(httpServletRequest);
         String username = jwtClaimUtils.extractSubjectClaim(accessToken);

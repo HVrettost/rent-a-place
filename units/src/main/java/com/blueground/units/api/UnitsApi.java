@@ -1,5 +1,6 @@
 package com.blueground.units.api;
 
+import com.blueground.common.exception.MarsRentalCoreException;
 import com.blueground.units.exception.UnitsException;
 import com.blueground.units.model.dto.UnitDto;
 import org.springframework.http.MediaType;
@@ -19,5 +20,5 @@ public interface UnitsApi {
             produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<List<UnitDto>> getUnitsBySearchValue(@RequestParam(value = "search") String searchValue,
                                                         @RequestParam(value = "page") Integer page,
-                                                        @RequestParam(value = "pageSize") Integer pageSize) throws UnitsException;
+                                                        @RequestParam(value = "pageSize") Integer pageSize) throws UnitsException, MarsRentalCoreException;
 }

@@ -1,13 +1,21 @@
 package com.blueground.reviews.exception;
 
+import com.blueground.common.exception.MarsRentalCoreException;
 import com.blueground.reviews.exception.error.ReviewsErrorCodes;
-import com.blueground.reviews.exception.error.ReviewsErrorDetails;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
 @Getter
-@RequiredArgsConstructor
-public class ReviewsException extends Exception {
+public class ReviewsException extends MarsRentalCoreException {
 
     private final ReviewsErrorCodes reviewsErrorCodes;
+
+    public ReviewsException(ReviewsErrorCodes reviewsErrorCodes, Throwable throwable) {
+        super(throwable);
+        this.reviewsErrorCodes = reviewsErrorCodes;
+    }
+
+    public ReviewsException(ReviewsErrorCodes reviewsErrorCodes) {
+        this.reviewsErrorCodes = reviewsErrorCodes;
+    }
+
 }

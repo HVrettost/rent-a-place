@@ -1,6 +1,6 @@
 package com.blueground.test.api;
 
-import com.blueground.auth.exception.AuthorizationException;
+import com.blueground.auth.exception.AuthException;
 import com.blueground.test.dto.UserCreationRequestDto;
 import com.blueground.users.model.entity.User;
 import org.springframework.http.MediaType;
@@ -12,7 +12,7 @@ public interface UsersTestApi {
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<User> createNewUser(@RequestBody UserCreationRequestDto requestDto) throws AuthorizationException;
+    ResponseEntity<User> createNewUser(@RequestBody UserCreationRequestDto requestDto) throws AuthException;
 
     @GetMapping(value = "{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<User> getUser(@PathVariable(value = "userId") String userId);

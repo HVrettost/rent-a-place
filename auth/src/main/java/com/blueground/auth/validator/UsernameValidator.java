@@ -2,6 +2,7 @@ package com.blueground.auth.validator;
 
 import com.blueground.auth.exception.AuthenticationException;
 import com.blueground.auth.exception.error.AuthenticationErrorCodes;
+import com.blueground.common.validator.Validator;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 

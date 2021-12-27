@@ -2,7 +2,7 @@ package com.blueground.test.controller;
 
 import com.blueground.auth.dao.AuthRoleToUsernameDao;
 import com.blueground.auth.domain.UserAuthType;
-import com.blueground.auth.exception.AuthorizationException;
+import com.blueground.auth.exception.AuthException;
 import com.blueground.test.api.UsersTestApi;
 import com.blueground.test.dto.UserCreationRequestDto;
 import com.blueground.test.repository.UsersTestRepository;
@@ -24,7 +24,7 @@ public class UsersTestController implements UsersTestApi {
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
-    public ResponseEntity<User> createNewUser(UserCreationRequestDto requestDto) throws AuthorizationException {
+    public ResponseEntity<User> createNewUser(UserCreationRequestDto requestDto) throws AuthException {
         User user = new User();
         user.setName(requestDto.getName());
         user.setSurname(requestDto.getSurname());

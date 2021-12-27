@@ -4,6 +4,9 @@ import com.blueground.auth.exception.AuthorizationException;
 import com.blueground.auth.exception.error.AuthorizationErrorCodes;
 import com.blueground.auth.jwt.enumeration.TokenType;
 import com.blueground.auth.validator.TokenCookieValidator;
+import com.blueground.auth.validator.Validator;
+import com.blueground.common.exception.MarsRentalCoreException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
 
@@ -11,13 +14,10 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 
 @Component
+@RequiredArgsConstructor
 public class HeaderUtils {
 
     private final TokenCookieValidator tokenCookieValidator;
-
-    public HeaderUtils(TokenCookieValidator tokenCookieValidator) {
-        this.tokenCookieValidator = tokenCookieValidator;
-    }
 
     public String extractUserAgent(HttpServletRequest request) throws AuthorizationException {
         String userAgent = request.getHeader(HttpHeaders.USER_AGENT);

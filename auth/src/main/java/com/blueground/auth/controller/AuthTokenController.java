@@ -2,8 +2,7 @@ package com.blueground.auth.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.blueground.auth.exception.AuthenticationException;
-import com.blueground.auth.exception.AuthorizationException;
+import com.blueground.common.exception.MarsRentalCoreException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -24,7 +23,7 @@ public class AuthTokenController implements AuthTokenApi {
 
     @Override
     public ResponseEntity<Void> generateAccessToken(HttpServletRequest httpServletRequest,
-                                                    AuthenticationRequestDto authenticationRequest) throws AuthenticationException, AuthorizationException {
+                                                    AuthenticationRequestDto authenticationRequest) throws MarsRentalCoreException {
         authenticationService.authenticate(authenticationRequest);
         HttpHeaders httpHeaders = authTokenService.createCookieHeadersForAuthorization(httpServletRequest, authenticationRequest.getUsername());
 
@@ -32,19 +31,19 @@ public class AuthTokenController implements AuthTokenApi {
     }
 
     @Override
-    public ResponseEntity<Void> updateAccessToken(HttpServletRequest httpServletRequest) throws AuthorizationException {
+    public ResponseEntity<Void> updateAccessToken(HttpServletRequest httpServletRequest) throws MarsRentalCoreException {
         HttpHeaders httpHeaders = authTokenService.updateCookieHeaderForAccessToken(httpServletRequest);
         return new ResponseEntity<>(httpHeaders, HttpStatus.NO_CONTENT);
     }
 
     @Override
-    public ResponseEntity<Void> invalidateRefreshToken(HttpServletRequest httpServletRequest) throws AuthorizationException {
+    public ResponseEntity<Void> invalidateRefreshToken(HttpServletRequest httpServletRequest) throws MarsRentalCoreException {
         authTokenService.invalidateRefreshToken(httpServletRequest);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @Override
-    public ResponseEntity<Void> invalidateRefreshTokensByUsername(HttpServletRequest httpServletRequest) throws AuthorizationException {
+    public ResponseEntity<Void> invalidateRefreshTokensByUsername(HttpServletRequest httpServletRequest) throws MarsRentalCoreException {
         authTokenService.invalidateRefreshTokensByUsername(httpServletRequest);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

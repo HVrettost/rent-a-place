@@ -3,6 +3,7 @@ package com.blueground.auth.validator;
 import com.blueground.auth.exception.AuthorizationException;
 import com.blueground.auth.exception.error.AuthorizationErrorCodes;
 import com.blueground.auth.jwt.enumeration.TokenType;
+import com.blueground.common.validator.Validator;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 

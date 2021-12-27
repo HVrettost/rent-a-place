@@ -9,9 +9,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class ReviewDtoValidator implements Validator<ReviewDto> {
 
+    private static final int MINIMUM_SCORE = 0;
+    private static final int MAXIMUM_SCORE = 5;
+
     @Override
     public void validate(ReviewDto reviewDto) throws ReviewsException {
-        if (reviewDto.getScore() < 0 || reviewDto.getScore() > 5) {
+        if (reviewDto.getScore() < MINIMUM_SCORE || reviewDto.getScore() > MAXIMUM_SCORE) {
             throw new ReviewsException(ReviewsErrorCodes.INVALID_SCORE);
         } else if (reviewDto.getUnitId() == null) {
             throw new ReviewsException(ReviewsErrorCodes.UNIT_ID_NOT_FOUND);

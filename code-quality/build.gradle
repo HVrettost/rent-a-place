@@ -1,0 +1,38 @@
+plugins {
+    id 'checkstyle'
+}
+
+group 'com.blueground.codequality'
+version '1.0'
+
+bootJar {
+    enabled = false
+}
+
+checkstyle {
+    version '9.2.1'
+    reportsDir file("$project.buildDir/checkstyleReports")
+    configDirectory.set(file("$rootProject.projectDir/code-quality/config/checkstyle"))
+    configFile file("$project.projectDir/config/checkstyle/checkstyle.xml")
+    ignoreFailures false
+    showViolations true
+    maxErrors 0
+
+    checkstyleMain {
+        source {
+            files rootProject.files(
+                    'auth/src/main/java',
+                    'reviews/src/main/java',
+                    'units/src/main/java',
+                    'users/src/main/java',
+                    'test-api/src/main/java',
+                    'common/src/main/java')
+        }
+        reports {
+            html.enabled true
+            xml.enabled false
+        }
+    }
+}
+
+

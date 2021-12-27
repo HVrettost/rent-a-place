@@ -13,10 +13,10 @@ import java.util.UUID;
 @Repository
 public interface UnitsRepository extends PagingAndSortingRepository<Unit, UUID> {
 
-    @Query(value = "SELECT * " +
-            "FROM MARSRENTAL.UNITS " +
-            "WHERE SEARCH_TOKENS @@ TO_TSQUERY(?1) " +
-            "ORDER BY AVERAGE_SCORE DESC NULLS LAST", nativeQuery = true)
+    @Query(value = "SELECT * "
+            + "FROM MARSRENTAL.UNITS "
+            + "WHERE SEARCH_TOKENS @@ TO_TSQUERY(?1) "
+            + "ORDER BY AVERAGE_SCORE DESC NULLS LAST", nativeQuery = true)
     Slice<Unit> findUnitsByVectorizedValues(String searchValue, Pageable pageable);
 
     @Modifying

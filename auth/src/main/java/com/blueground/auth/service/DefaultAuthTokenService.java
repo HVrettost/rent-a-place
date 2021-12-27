@@ -9,14 +9,12 @@ import com.blueground.auth.jwt.utils.JwtClaimUtils;
 import com.blueground.auth.jwt.utils.JwtGeneratorUtils;
 import com.blueground.auth.utils.CookieUtils;
 import com.blueground.auth.utils.HeaderUtils;
-import com.blueground.common.exception.MarsRentalCoreException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.transaction.TransactionScoped;
 
 @Service
 @RequiredArgsConstructor

@@ -41,6 +41,3 @@ subprojects {
         exclude('com/blueground/functionaltests/**')
     }
 }
-
-
-

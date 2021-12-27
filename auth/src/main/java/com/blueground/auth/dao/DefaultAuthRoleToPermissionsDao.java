@@ -3,7 +3,6 @@ package com.blueground.auth.dao;
 import com.blueground.auth.domain.AuthRoleToAuthoritiesDomain;
 import com.blueground.auth.exception.AuthorizationException;
 import com.blueground.auth.exception.error.AuthorizationErrorCodes;
-import com.blueground.auth.converter.AuthRoleToAuthoritiesConverter;
 import com.blueground.auth.model.entity.AuthRoleToAuthorities;
 import com.blueground.auth.repository.AuthRoleToAuthoritiesRepository;
 import lombok.RequiredArgsConstructor;

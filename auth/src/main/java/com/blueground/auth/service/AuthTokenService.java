@@ -1,7 +1,6 @@
 package com.blueground.auth.service;
 
 import com.blueground.auth.exception.AuthorizationException;
-import com.blueground.common.exception.MarsRentalCoreException;
 import org.springframework.http.HttpHeaders;
 
 import javax.servlet.http.HttpServletRequest;

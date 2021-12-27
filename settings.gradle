@@ -7,4 +7,5 @@ include 'functional-tests'
 include 'test-api'
 include 'auth'
 include 'common'
+include 'code-quality'
 

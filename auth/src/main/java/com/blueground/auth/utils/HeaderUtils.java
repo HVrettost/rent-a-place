@@ -4,8 +4,6 @@ import com.blueground.auth.exception.AuthorizationException;
 import com.blueground.auth.exception.error.AuthorizationErrorCodes;
 import com.blueground.auth.jwt.enumeration.TokenType;
 import com.blueground.auth.validator.TokenCookieValidator;
-import com.blueground.auth.validator.Validator;
-import com.blueground.common.exception.MarsRentalCoreException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;

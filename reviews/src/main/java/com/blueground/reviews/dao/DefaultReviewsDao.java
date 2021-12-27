@@ -43,7 +43,7 @@ public class DefaultReviewsDao implements ReviewsDao {
     }
 
     @Override
-    public void updateAverageScoreForUnit(Integer averageScore, UUID unitId) throws UnitsException{
+    public void updateAverageScoreForUnit(Integer averageScore, UUID unitId) throws UnitsException {
         try {
             unitsRepository.updateUnitAverageScore(averageScore, unitId);
         } catch (Exception ex) {

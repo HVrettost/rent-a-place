@@ -11,7 +11,8 @@ public class SearchValueValidator implements Validator<String> {
 
     @Override
     public void validate(String value) throws UnitsException {
-        if (!StringUtils.hasText(value))
+        if (!StringUtils.hasText(value)) {
             throw new UnitsException(UnitsErrorCodes.EMPTY_SEARCH_VALUE);
+        }
     }
 }

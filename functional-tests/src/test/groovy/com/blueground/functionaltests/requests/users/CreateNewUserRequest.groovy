@@ -1,7 +1,6 @@
 package com.blueground.functionaltests.requests.users
 
 import com.blueground.functionaltests.domain.User
-import com.blueground.functionaltests.dto.AuthenticationRequestDto
 import com.blueground.functionaltests.dto.UserCreationRequestDto
 import com.blueground.functionaltests.exception.HttpErrorResponse
 import com.blueground.functionaltests.requests.Request

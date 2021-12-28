@@ -1,0 +1,63 @@
+{
+	"info": {
+		"_postman_id": "3e14dfaa-9c7e-4372-a970-4a4713a4b3bf",
+		"name": "Blueground assignment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Save Review",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"score\": 5,\n    \"comment\": \"a comment\",\n    \"userId\": \"b5d46ba0-b0e0-4f0e-a399-e796d3569d3a\",\n    \"unitId\": \"b5d46ba0-b0e0-4f0e-a399-e796d3569d3a\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/v1/marsrental/reviews",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"marsrental",
+						"reviews"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Units By Page",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		},
+		{
+			"name": "Authenticate and retrieve Access Token in Cookie",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		}
+	]
+}

@@ -27,7 +27,7 @@ class ReviewsDtoValidatorTest extends Specification {
             exceptionThrown.reviewsErrorCodes == ReviewsErrorCodes.INVALID_SCORE
 
         where:
-            score << [-1, 6, -100, 7, 900]
+            score << [-1, 0, 6, -100, 7, 900]
     }
 
     def "should throw exception if unit id is not existent in dto"() {

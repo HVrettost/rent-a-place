@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ReviewDtoValidator implements Validator<ReviewDto> {
 
-    private static final int MINIMUM_SCORE = 0;
+    private static final int MINIMUM_SCORE = 1;
     private static final int MAXIMUM_SCORE = 5;
 
     @Override

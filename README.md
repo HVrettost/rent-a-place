@@ -72,7 +72,7 @@ I also created some other endpoints for invalidation and refresh the access toke
 - I think that locks was not necessary to apply. In my opinion this functionality works in concurrency well as is.
 - Split the requirements in domains
 - Did not have time to write Unit Tests for everything
-- Also a module test approach would be good to have been implemented to test stuff like transactionality
+- Also, a module test approach would be good to have been implemented to test database stuff
 
 
 

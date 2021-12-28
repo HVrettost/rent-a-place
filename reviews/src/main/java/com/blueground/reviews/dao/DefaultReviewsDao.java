@@ -6,7 +6,6 @@ import com.blueground.reviews.exception.error.ReviewsErrorCodes;
 import com.blueground.reviews.model.entity.Review;
 import com.blueground.reviews.repository.ReviewsRepository;
 import com.blueground.units.exception.UnitsException;
-import com.blueground.units.exception.error.UnitsErrorCodes;
 import com.blueground.units.repository.UnitsRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,16 +21,19 @@ public class DefaultReviewsDao implements ReviewsDao {
 
     private final ReviewsRepository reviewsRepository;
     private final UnitsRepository unitsRepository;
-    private final Converter<ReviewDto, Review> reviewDtoConverter;
+    private final Converter<ReviewDto, Review> converter;
 
     @Override
-    public void insertReviewInDatabase(ReviewDto review) throws ReviewsException {
-        Review entity = reviewDtoConverter.convert(review);
-        try {
-            reviewsRepository.save(entity);
-        } catch (Exception ex) {
-            throw new ReviewsException(ReviewsErrorCodes.ERROR_REVIEW_SAVE, ex);
-        }
+    public void insertReviewInDatabase(ReviewDto review) {
+        Review entity = converter.convert(review);
+        //No need to add catch exception here as I am not flushing immediately the entity
+        //in the database so the catch clause would not catch the exception here
+        //The transaction will be caught in the handler in the aspect(ReviewsExceptionHandler).
+        //If I flush here and the subsequent db calls for updating the score fails there will be inconsistency as the average score
+        //will not depict the actual score of the unit
+        //@Transaction annotation in service layer will rollback the whole transaction and consistency will be achieved
+        //@Transactional rolls back for all runtime exceptions as is, so exception thrown by converter and repository will be caught
+        reviewsRepository.save(entity);
     }
 
     @Override
@@ -44,10 +46,8 @@ public class DefaultReviewsDao implements ReviewsDao {
 
     @Override
     public void updateAverageScoreForUnit(Integer averageScore, UUID unitId) throws UnitsException {
-        try {
-            unitsRepository.updateUnitAverageScore(averageScore, unitId);
-        } catch (Exception ex) {
-            throw new UnitsException(UnitsErrorCodes.COULD_NOT_UPDATE_SCORE);
-        }
+        //Same as above, no need to add catch block here.
+        //Exception will be delegated through callstack in the advice handler
+        unitsRepository.updateUnitAverageScore(averageScore, unitId);
     }
 }

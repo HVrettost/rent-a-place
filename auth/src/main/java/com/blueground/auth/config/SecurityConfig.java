@@ -25,7 +25,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
 @RequiredArgsConstructor
-public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebMvcConfigurer {
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private static final String AUTH_ACCESS_TOKEN_URI = "marsrental/v1/auth/token/access";
     private static final String AUTH_TEST_ENDPOINTS_WILDCARD_URI = "marsrental/test/**";

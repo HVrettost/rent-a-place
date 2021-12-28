@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class UserDtoConverter implements Converter<User, UserDomain> {
+public class UserDomainConverter implements Converter<User, UserDomain> {
 
     private final ModelMapper modelMapper;
 

@@ -9,7 +9,7 @@ import java.util.UUID;
 
 public interface ReviewsDao {
 
-    void insertReviewInDatabase(@NonNull ReviewDto review) throws ReviewsException;
+    void insertReviewInDatabase(@NonNull ReviewDto review);
 
     Integer calculateReviewsAverageScoreForUnit(UUID unitId) throws ReviewsException;
 

@@ -30,7 +30,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
 @Slf4j
 @RequiredArgsConstructor
 public class AuthorizationFilter implements Filter {
@@ -50,13 +49,13 @@ public class AuthorizationFilter implements Filter {
 
         if (!httpRequest.getRequestURI().startsWith("/marsrental/v")
                 || httpRequest.getRequestURI().startsWith("/marsrental/test/v")
-                || isAuthenticateRequest(httpRequest)) {
+                || isAuthenticationRequest(httpRequest)) {
             chain.doFilter(request, response);
             return;
         }
 
         try {
-            if (isUpdateAccessTokenRequest(httpRequest)) {
+            if (isRefreshAccessTokenRequest(httpRequest)) {
                 String refreshToken = headerUtils.extractRefreshToken(httpRequest);
                 jwtValidator.validate(refreshToken);
                 chain.doFilter(request, response);
@@ -91,7 +90,7 @@ public class AuthorizationFilter implements Filter {
             );
             return;
         } catch (Exception exception) {
-            log.error("Generic Error", exception);
+            log.error(AuthorizationErrorCodes.GENERIC_AUTHORIZATION_ERROR.getDescription(), exception);
             setErrorDetailsAndStatusInServletResponse(
                     httpResponse,
                     AuthorizationErrorCodes.GENERIC_AUTHORIZATION_ERROR.getHttpStatus(),
@@ -106,11 +105,11 @@ public class AuthorizationFilter implements Filter {
         chain.doFilter(request, response);
     }
 
-    private boolean isUpdateAccessTokenRequest(HttpServletRequest request) {
+    private boolean isRefreshAccessTokenRequest(HttpServletRequest request) {
         return HttpMethod.PUT.name().equals(request.getMethod()) && REFRESH_TOKEN_ENDPOINT.equals(request.getRequestURI());
     }
 
-    private boolean isAuthenticateRequest(HttpServletRequest request) {
+    private boolean isAuthenticationRequest(HttpServletRequest request) {
         return HttpMethod.POST.name().equals(request.getMethod()) && ACCESS_TOKEN_ENDPOINT.equals(request.getRequestURI());
     }
 

@@ -1,6 +1,5 @@
 package com.blueground.units.dao;
 
-import com.blueground.units.converter.UnitDtoConverter;
 import com.blueground.units.model.domain.PageReq;
 import com.blueground.units.model.dto.UnitDto;
 import com.blueground.units.model.entity.Unit;
@@ -8,6 +7,7 @@ import com.blueground.units.repository.UnitsRepository;
 
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.core.convert.converter.Converter;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 public class DefaultUnitsDao implements UnitsDao {
 
     private final UnitsRepository unitsRepository;
-    private final UnitDtoConverter unitDtoConverter;
+    private final Converter<Unit, UnitDto> converter;
 
     @Override
     public List<UnitDto> getUnitsBySearchValueFromTokens(String searchValue, PageReq pageRequest) {
@@ -31,7 +31,7 @@ public class DefaultUnitsDao implements UnitsDao {
 
         return unitsPage.getContent()
                 .stream()
-                .map(unitDtoConverter::convert)
+                .map(converter::convert)
                 .collect(Collectors.toList());
     }
 }

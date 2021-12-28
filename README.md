@@ -10,7 +10,7 @@ Technologies
 - Spring Security 2.5.0
 - Java JWT (Java implementation for JWT)
 - Postgres 42.3.1
-- Lombock (to reduce the written code before compilation)
+- Lombock (to reduce the written code in Java classes)
 - Spring JPA
 - Spock for testing
 - Codenarc for Groovy static code analysis

@@ -1,4 +1,4 @@
-rootProject.name = 'bg-backend-assignment'
+rootProject.name = 'rent-a-place'
 include 'users'
 include 'reviews'
 include 'units'

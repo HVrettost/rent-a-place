@@ -9,7 +9,7 @@ import org.springframework.web.client.RestTemplate
 class DeleteAllUnitsRequest implements Request {
 
     private RestTemplate restTemplate
-    private String url = '%s/marsrental/test/v1/units/all'
+    private String url = '%s/rentaplace/test/v1/units/all'
 
     DeleteAllUnitsRequest(RestTemplate restTemplate) {
         this.restTemplate = restTemplate

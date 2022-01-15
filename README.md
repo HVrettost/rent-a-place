@@ -1,7 +1,7 @@
 ## RENT A PLACE OVERVIEW
 
 TL;DR;  
-A small application that you can rent a place / server side
+A small application that you can rent a place / server side - `ONGOING`
 
 
 Technologies
@@ -22,10 +22,10 @@ Technologies
 
 ### Run the application  
 - Run `./gradlew clean build` this will clean the app(if already built) and then build the app and produce the needed jar in order to incorporate it in the Docker image(Dockerfile is provided in the root folder)
-- Run `./gradlew mStart` (This command will run the docker compose tool and create the images for Flyway, Postgres and the mars rental application in order to run them in containers)
+- Run `./gradlew appStart` (This command will run the docker compose tool and create the images for Flyway, Postgres and the rent-a-place application in order to run them in containers)
 
 ### Stop the application
-- Run `./gradlew mStop`
+- Run `./gradlew appStop`
 
 ### Run the functional tests 
 - Under the module functional-tests I have created an FT suite. In order for the FT suite to run we need to have the application up and running by following the instruction in `Run the application` section

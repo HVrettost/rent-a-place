@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
-@RequestMapping(value = "marsrental/test/v1")
+@RequestMapping(value = "rentaplace/test/v1")
 public interface ReviewsTestApi {
 
     @DeleteMapping(value = "reviews/all", produces = MediaType.APPLICATION_JSON_VALUE)

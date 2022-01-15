@@ -1,11 +1,11 @@
 package com.blueground.reviews.exception;
 
-import com.blueground.common.exception.MarsRentalCoreException;
+import com.blueground.common.exception.RentAPlaceCoreException;
 import com.blueground.reviews.exception.error.ReviewsErrorCodes;
 import lombok.Getter;
 
 @Getter
-public class ReviewsException extends MarsRentalCoreException {
+public class ReviewsException extends RentAPlaceCoreException {
 
     private final ReviewsErrorCodes reviewsErrorCodes;
 

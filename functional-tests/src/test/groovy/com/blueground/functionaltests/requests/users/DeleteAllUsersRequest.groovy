@@ -9,7 +9,7 @@ import org.springframework.web.client.RestTemplate
 class DeleteAllUsersRequest implements Request {
 
     private RestTemplate restTemplate
-    private String url = '%s/marsrental/test/v1/users/all'
+    private String url = '%s/rentaplace/test/v1/users/all'
 
     DeleteAllUsersRequest(RestTemplate restTemplate) {
         this.restTemplate = restTemplate

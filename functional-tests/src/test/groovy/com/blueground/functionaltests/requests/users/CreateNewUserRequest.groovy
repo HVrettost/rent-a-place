@@ -12,7 +12,7 @@ import org.springframework.web.client.RestTemplate
 class CreateNewUserRequest implements Request {
 
     private RestTemplate restTemplate
-    private String url = '%s/marsrental/test/v1/users'
+    private String url = '%s/rentaplace/test/v1/users'
     private UserCreationRequestDto dto
 
     CreateNewUserRequest(RestTemplate restTemplate, UserCreationRequestDto dto) {

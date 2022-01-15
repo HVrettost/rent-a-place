@@ -9,7 +9,7 @@ import org.springframework.web.client.RestTemplate
 import spock.lang.Shared
 import spock.lang.Specification
 
-class MarsRentalFTSetup extends Specification {
+class RentAPlacelFTSetup extends Specification {
 
     @Shared
     UserActor userActor

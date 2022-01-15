@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@RequestMapping(value = "marsrental/test/v1")
+@RequestMapping(value = "rentaplace/test/v1")
 public interface UnitsTestApi {
 
     @DeleteMapping(value = "units/all", produces = MediaType.APPLICATION_JSON_VALUE)

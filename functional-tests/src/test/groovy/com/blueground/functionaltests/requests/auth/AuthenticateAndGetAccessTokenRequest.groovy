@@ -11,7 +11,7 @@ import org.springframework.web.client.RestTemplate
 class AuthenticateAndGetAccessTokenRequest implements Request {
 
     private RestTemplate restTemplate
-    private String url = '%s/marsrental/v1/auth/token/access'
+    private String url = '%s/rentaplace/v1/auth/token/access'
     private AuthenticationRequestDto dto
     private String userAgent
 

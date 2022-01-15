@@ -1,11 +1,11 @@
 package com.blueground.users.exception;
 
-import com.blueground.common.exception.MarsRentalCoreException;
+import com.blueground.common.exception.RentAPlaceCoreException;
 import com.blueground.users.exception.error.UsersErrorCodes;
 import lombok.Getter;
 
 @Getter
-public class UsersException extends MarsRentalCoreException {
+public class UsersException extends RentAPlaceCoreException {
 
     private final UsersErrorCodes usersErrorCodes;
 

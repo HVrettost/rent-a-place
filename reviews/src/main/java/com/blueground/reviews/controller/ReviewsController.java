@@ -1,6 +1,6 @@
 package com.blueground.reviews.controller;
 
-import com.blueground.common.exception.MarsRentalCoreException;
+import com.blueground.common.exception.RentAPlaceCoreException;
 import com.blueground.common.validator.Validator;
 import com.blueground.reviews.api.ReviewsApi;
 import com.blueground.reviews.model.dto.ReviewDto;
@@ -18,7 +18,7 @@ public class ReviewsController implements ReviewsApi {
     private final Validator<ReviewDto> reviewDtoValidator;
 
     @Override
-    public ResponseEntity<Void> saveReview(ReviewDto reviewDto) throws MarsRentalCoreException {
+    public ResponseEntity<Void> saveReview(ReviewDto reviewDto) throws RentAPlaceCoreException {
         reviewDtoValidator.validate(reviewDto);
         reviewsService.saveReviewAndUpdateAverageScoreForUnit(reviewDto);
 

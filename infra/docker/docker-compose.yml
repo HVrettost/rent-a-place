@@ -1,0 +1,36 @@
+version: '3.9'
+services:
+  rent-a-place-application:
+    build: ../../.
+    container_name: rent-a-place-application
+    links:
+      - rent-a-place-database
+    depends_on:
+      - rent-a-place-migration
+      - rent-a-place-database
+    ports:
+      - 8900:8900
+
+  rent-a-place-database:
+    image: postgres:14.1
+    environment:
+      POSTGRES_USER: rentaplace_user
+      POSTGRES_PASSWORD: rentaplace_password
+      POSTGRES_DB: rentaplacedb
+    ports:
+      - 5432:5432
+    container_name: rent-a-place-database
+
+  rent-a-place-migration:
+    image: flyway/flyway:8.2.3
+    environment:
+      FLYWAY_USER: rentaplace_user
+      FLYWAY_PASSWORD: rentaplace_password
+      FLYWAY_SCHEMAS: rentaplace
+      FLYWAY_URL: jdbc:postgresql://rent-a-place-database:5432/rentaplacedb
+    command: -connectRetries=60 migrate
+    depends_on:
+      - rent-a-place-database
+    volumes:
+      - ./migration-scripts:/flyway/sql
+    container_name: rent-a-place-flyway

@@ -6,17 +6,17 @@ bootJar {
 }
 
 task postgresStart(type: Exec) {
-    commandLine 'docker-compose', '-f', 'docker-compose.yml', 'up', '-d', 'marsrental-database'
+    commandLine 'docker-compose', '-f', 'docker/docker-compose.yml', 'up', '-d', 'rent-a-place-database'
 }
 
 task postgresStop(type: Exec) {
-    commandLine 'docker-compose', '-f', 'docker-compose.yml', 'rm', '--stop', '--force', '-v', 'marsrental-database'
+    commandLine 'docker-compose', '-f', 'docker/docker-compose.yml', 'rm', '--stop', '--force', '-v', 'rent-a-place-database'
 }
 
-task marsrentalStart(type: Exec) {
-    commandLine 'docker-compose', '-f', 'docker-compose.yml', 'up', 'marsrental-application'
+task appStart(type: Exec) {
+    commandLine 'docker-compose', '-f', 'docker/docker-compose.yml', 'up', 'rent-a-place-application'
 }
 
-task marsrentalStop(type: Exec) {
-    commandLine 'docker-compose', '-f', 'docker-compose.yml', 'rm', '--stop', '--force', '-v', 'marsrental-application'
+task appStop(type: Exec) {
+    commandLine 'docker-compose', '-f', 'docker/docker-compose.yml', 'rm', '--stop', '--force', '-v', 'rent-a-place-application'
 }

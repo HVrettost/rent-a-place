@@ -26,7 +26,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/v1/marsrental/reviews",
+					"raw": "http://localhost:8080/v1/rentaplace/reviews",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -34,7 +34,7 @@
 					"port": "8080",
 					"path": [
 						"v1",
-						"marsrental",
+						"rentaplace",
 						"reviews"
 					]
 				}

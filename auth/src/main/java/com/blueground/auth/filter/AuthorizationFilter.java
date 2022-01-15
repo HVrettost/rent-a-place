@@ -34,8 +34,8 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class AuthorizationFilter implements Filter {
 
-    private static final String ACCESS_TOKEN_ENDPOINT = "/marsrental/v1/auth/token/access";
-    private static final String REFRESH_TOKEN_ENDPOINT = "/marsrental/v1/token/refresh";
+    private static final String ACCESS_TOKEN_ENDPOINT = "/rentaplace/v1/auth/token/access";
+    private static final String REFRESH_TOKEN_ENDPOINT = "/rentaplace/v1/token/refresh";
 
     private final JwtValidator jwtValidator;
     private final JwtClaimUtils jwtClaimUtils;
@@ -47,8 +47,8 @@ public class AuthorizationFilter implements Filter {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         HttpServletResponse httpResponse = (HttpServletResponse) response;
 
-        if (!httpRequest.getRequestURI().startsWith("/marsrental/v")
-                || httpRequest.getRequestURI().startsWith("/marsrental/test/v")
+        if (!httpRequest.getRequestURI().startsWith("/rentaplace/v")
+                || httpRequest.getRequestURI().startsWith("/rentaplace/test/v")
                 || isAuthenticationRequest(httpRequest)) {
             chain.doFilter(request, response);
             return;

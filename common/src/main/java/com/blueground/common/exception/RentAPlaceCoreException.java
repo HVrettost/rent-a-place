@@ -3,9 +3,9 @@ package com.blueground.common.exception;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
-public class MarsRentalCoreException extends Exception {
+public class RentAPlaceCoreException extends Exception {
 
-    public MarsRentalCoreException(Throwable throwable) {
+    public RentAPlaceCoreException(Throwable throwable) {
         super(throwable);
     }
 }

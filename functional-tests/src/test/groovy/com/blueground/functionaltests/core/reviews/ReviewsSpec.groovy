@@ -1,6 +1,6 @@
 package com.blueground.functionaltests.core.reviews
 
-import com.blueground.functionaltests.config.MarsRentalFTSetup
+import com.blueground.functionaltests.config.RentAPlacelFTSetup
 import com.blueground.functionaltests.domain.Review
 import com.blueground.functionaltests.domain.Unit
 import com.blueground.functionaltests.domain.User
@@ -12,7 +12,7 @@ import com.blueground.functionaltests.exception.ReviewsErrorCodes
 import com.blueground.functionaltests.utils.UserUtils
 import spock.lang.Unroll
 
-class ReviewsSpec extends MarsRentalFTSetup implements UserUtils {
+class ReviewsSpec extends RentAPlacelFTSetup implements UserUtils {
 
     def cleanupSpec() {
         systemActor.deleteAllUnitsFromDatabase(restTemplate)

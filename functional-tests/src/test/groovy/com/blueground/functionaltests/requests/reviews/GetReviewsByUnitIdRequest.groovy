@@ -10,7 +10,7 @@ import org.springframework.web.client.RestTemplate
 class GetReviewsByUnitIdRequest implements Request {
 
     private RestTemplate restTemplate
-    private String url = '%s/marsrental/test/v1/reviews?unitId=%s'
+    private String url = '%s/rentaplace/test/v1/reviews?unitId=%s'
 
     GetReviewsByUnitIdRequest(RestTemplate restTemplate, UUID unitId) {
         this.restTemplate = restTemplate

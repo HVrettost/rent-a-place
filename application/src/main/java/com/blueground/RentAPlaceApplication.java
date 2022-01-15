@@ -6,9 +6,9 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @ComponentScan(basePackages = "com.blueground")
-public class MarsRentalApplication {
+public class RentAPlaceApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(MarsRentalApplication.class, args);
+        SpringApplication.run(RentAPlaceApplication.class, args);
     }
 }

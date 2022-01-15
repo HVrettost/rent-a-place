@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
 @Configuration
-@ConfigurationProperties(prefix = "marsrental.auth.jwt")
+@ConfigurationProperties(prefix = "rentaplace.auth.jwt")
 @PropertySource("classpath:${spring.profiles.active}/jwt-${spring.profiles.active}.properties")
 @Getter
 @Setter

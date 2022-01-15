@@ -1,6 +1,6 @@
 package com.blueground.units.controller;
 
-import com.blueground.common.exception.MarsRentalCoreException;
+import com.blueground.common.exception.RentAPlaceCoreException;
 import com.blueground.common.validator.Validator;
 import com.blueground.units.model.domain.PageReq;
 import com.blueground.units.model.dto.UnitDto;
@@ -23,7 +23,7 @@ public class UnitsController implements UnitsApi {
     private final Validator<PageReq> pageRequestValidator;
 
     @Override
-    public ResponseEntity<List<UnitDto>> getUnitsBySearchValue(String searchValue, Integer page, Integer pageSize) throws MarsRentalCoreException {
+    public ResponseEntity<List<UnitDto>> getUnitsBySearchValue(String searchValue, Integer page, Integer pageSize) throws RentAPlaceCoreException {
         searchValueValidator.validate(searchValue);
         PageReq pageRequest = createPageRequest(page, pageSize);
         pageRequestValidator.validate(pageRequest);

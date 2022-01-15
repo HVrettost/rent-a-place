@@ -9,7 +9,7 @@ import org.springframework.web.client.RestTemplate
 class GetUnitAverageScoreRequest implements Request {
 
     private RestTemplate restTemplate
-    private String url = '%s/marsrental/test/v1/units/score?unitId=%s'
+    private String url = '%s/rentaplace/test/v1/units/score?unitId=%s'
 
     GetUnitAverageScoreRequest(RestTemplate restTemplate, UUID unitId) {
         this.restTemplate = restTemplate

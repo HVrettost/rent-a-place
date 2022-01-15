@@ -11,7 +11,7 @@ import org.springframework.web.client.RestTemplate
 class CreateNewUnitRequest implements Request {
 
     private RestTemplate restTemplate
-    private String url = '%s/marsrental/test/v1/units'
+    private String url = '%s/rentaplace/test/v1/units'
     private UnitCreationRequestDto dto
 
     CreateNewUnitRequest(RestTemplate restTemplate, UnitCreationRequestDto dto) {

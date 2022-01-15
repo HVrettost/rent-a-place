@@ -1,6 +1,6 @@
 package com.blueground.functionaltests.core.auth
 
-import com.blueground.functionaltests.config.MarsRentalFTSetup
+import com.blueground.functionaltests.config.RentAPlacelFTSetup
 import com.blueground.functionaltests.domain.User
 import com.blueground.functionaltests.dto.AuthenticationRequestDto
 import com.blueground.functionaltests.dto.UserCreationRequestDto
@@ -8,7 +8,7 @@ import com.blueground.functionaltests.utils.JwtUtils
 import com.blueground.functionaltests.utils.UserUtils
 import spock.lang.Unroll
 
-class AuthSpec extends MarsRentalFTSetup implements UserUtils, JwtUtils {
+class AuthSpec extends RentAPlacelFTSetup implements UserUtils, JwtUtils {
 
     def cleanupSpec() {
         systemActor.deleteAllUsersFromDatabase(restTemplate)

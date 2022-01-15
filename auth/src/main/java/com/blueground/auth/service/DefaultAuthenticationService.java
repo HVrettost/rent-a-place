@@ -2,7 +2,7 @@ package com.blueground.auth.service;
 
 import com.blueground.auth.model.dto.AuthenticationRequestDto;
 import com.blueground.auth.validator.UsernameValidator;
-import com.blueground.common.exception.MarsRentalCoreException;
+import com.blueground.common.exception.RentAPlaceCoreException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -16,7 +16,7 @@ public class DefaultAuthenticationService implements AuthenticationService {
     private final UsernameValidator usernameValidator;
 
     @Override
-    public void authenticate(AuthenticationRequestDto authenticationRequest) throws MarsRentalCoreException {
+    public void authenticate(AuthenticationRequestDto authenticationRequest) throws RentAPlaceCoreException {
         usernameValidator.validate(authenticationRequest.getUsername());
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(),
                 authenticationRequest.getPassword()));

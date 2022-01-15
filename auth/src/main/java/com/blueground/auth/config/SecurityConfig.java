@@ -26,12 +26,12 @@ import org.springframework.security.web.access.intercept.FilterSecurityIntercept
 @RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private static final String AUTH_ACCESS_TOKEN_URI = "marsrental/v1/auth/token/access";
-    private static final String AUTH_TEST_ENDPOINTS_WILDCARD_URI = "marsrental/test/**";
-    private static final String AUTH_REFRESH_TOKEN_URI = "marsrental/v1/auth/token/refresh";
-    private static final String AUTH_REFRESH_TOKEN_ALL_URI = "marsrental/v1/auth/token/all";
-    private static final String GET_UNITS_BY_SEARCH_VALUE_URI = "marsrental/v1/units";
-    private static final String SAVE_REVIEW_URI = "marsrental/v1/reviews";
+    private static final String AUTH_ACCESS_TOKEN_URI = "rentaplace/v1/auth/token/access";
+    private static final String AUTH_TEST_ENDPOINTS_WILDCARD_URI = "rentaplace/test/**";
+    private static final String AUTH_REFRESH_TOKEN_URI = "rentaplace/v1/auth/token/refresh";
+    private static final String AUTH_REFRESH_TOKEN_ALL_URI = "rentaplace/v1/auth/token/all";
+    private static final String GET_UNITS_BY_SEARCH_VALUE_URI = "rentaplace/v1/units";
+    private static final String SAVE_REVIEW_URI = "rentaplace/v1/reviews";
 
     private final UserDetailsService userDetailsService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;

@@ -11,7 +11,7 @@ import org.springframework.web.client.RestTemplate
 class SaveReviewRequest implements Request {
 
     private RestTemplate restTemplate
-    private String url = '%s/marsrental/v1/reviews'
+    private String url = '%s/rentaplace/v1/reviews'
     private Review reviewDto
     def cookie
     private String userAgent

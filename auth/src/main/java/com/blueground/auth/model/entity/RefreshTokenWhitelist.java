@@ -15,7 +15,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @Entity
-@Table(name = "REFRESH_TOKEN_WHITELIST", schema = "MARSRENTAL")
+@Table(name = "REFRESH_TOKEN_WHITELIST", schema = "RENTAPLACE")
 public class RefreshTokenWhitelist {
 
     @Id

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.DeleteMapping;
 
-@RequestMapping(value = "marsrental/test/v1/users")
+@RequestMapping(value = "rentaplace/test/v1/users")
 public interface UsersTestApi {
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE,

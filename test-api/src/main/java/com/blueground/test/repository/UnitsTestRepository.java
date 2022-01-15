@@ -12,6 +12,6 @@ import java.util.UUID;
 public interface UnitsTestRepository extends JpaRepository<Unit, UUID> {
 
     @Modifying
-    @Query(value = "UPDATE MARSRENTAL.UNITS SET SEARCH_TOKENS = TO_TSVECTOR(?1) WHERE UNIT_ID = ?2", nativeQuery = true)
+    @Query(value = "UPDATE RENTAPLACE.UNITS SET SEARCH_TOKENS = TO_TSVECTOR(?1) WHERE UNIT_ID = ?2", nativeQuery = true)
     void updateVectorsForRegionAndTitle(String vectorValue, UUID unitId);
 }

@@ -14,12 +14,12 @@ import java.util.UUID;
 public interface UnitsRepository extends PagingAndSortingRepository<Unit, UUID> {
 
     @Query(value = "SELECT * "
-            + "FROM MARSRENTAL.UNITS "
+            + "FROM RENTAPLACE.UNITS "
             + "WHERE SEARCH_TOKENS @@ TO_TSQUERY(?1) "
             + "ORDER BY AVERAGE_SCORE DESC NULLS LAST", nativeQuery = true)
     Slice<Unit> findUnitsByVectorizedValues(String searchValue, Pageable pageable);
 
     @Modifying
-    @Query(value = "UPDATE MARSRENTAL.UNITS SET AVERAGE_SCORE = ?1 WHERE UNIT_ID = ?2", nativeQuery = true)
+    @Query(value = "UPDATE RENTAPLACE.UNITS SET AVERAGE_SCORE = ?1 WHERE UNIT_ID = ?2", nativeQuery = true)
     void updateUnitAverageScore(Integer score, UUID unitId);
 }

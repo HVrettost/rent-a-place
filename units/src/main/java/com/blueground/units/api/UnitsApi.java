@@ -1,6 +1,6 @@
 package com.blueground.units.api;
 
-import com.blueground.common.exception.MarsRentalCoreException;
+import com.blueground.common.exception.RentAPlaceCoreException;
 import com.blueground.units.exception.UnitsException;
 import com.blueground.units.model.dto.UnitDto;
 import org.springframework.http.MediaType;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
-@RequestMapping(value = "marsrental/v1")
+@RequestMapping(value = "rentaplace/v1")
 public interface UnitsApi {
 
     @PreAuthorize("hasAuthority('RETRIEVE_UNITS')")
@@ -20,5 +20,5 @@ public interface UnitsApi {
             produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<List<UnitDto>> getUnitsBySearchValue(@RequestParam(value = "search") String searchValue,
                                                         @RequestParam(value = "page") Integer page,
-                                                        @RequestParam(value = "pageSize") Integer pageSize) throws UnitsException, MarsRentalCoreException;
+                                                        @RequestParam(value = "pageSize") Integer pageSize) throws UnitsException, RentAPlaceCoreException;
 }

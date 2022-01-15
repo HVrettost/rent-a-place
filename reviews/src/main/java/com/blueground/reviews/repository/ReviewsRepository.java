@@ -11,6 +11,6 @@ import java.util.UUID;
 @Repository
 public interface ReviewsRepository extends JpaRepository<Review, UUID> {
 
-    @Query(value = "SELECT AVG(SCORE) FROM MARSRENTAL.REVIEWS WHERE UNIT_ID = ?1", nativeQuery = true)
+    @Query(value = "SELECT AVG(SCORE) FROM RENTAPLACE.REVIEWS WHERE UNIT_ID = ?1", nativeQuery = true)
     Optional<Float> calculateUnitAverageScore(UUID unitId);
 }

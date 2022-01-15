@@ -12,7 +12,7 @@ import org.springframework.web.client.RestTemplate
 class GetUnitsBySearchValueRequest implements Request {
 
     private RestTemplate restTemplate
-    private String url = '%s/marsrental/v1/units?search=%s&page=%d&pageSize=%d'
+    private String url = '%s/rentaplace/v1/units?search=%s&page=%d&pageSize=%d'
     private def cookie
     private String userAgent
 

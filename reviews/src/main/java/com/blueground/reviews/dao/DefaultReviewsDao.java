@@ -6,7 +6,7 @@ import com.blueground.reviews.exception.error.ReviewsErrorCodes;
 import com.blueground.reviews.model.entity.Review;
 import com.blueground.reviews.repository.ReviewsRepository;
 import com.blueground.units.exception.UnitsException;
-import com.blueground.units.repository.UnitsRepository;
+import com.blueground.units.repository.RetrieveUnitsRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.convert.converter.Converter;
@@ -20,7 +20,7 @@ import java.util.UUID;
 public class DefaultReviewsDao implements ReviewsDao {
 
     private final ReviewsRepository reviewsRepository;
-    private final UnitsRepository unitsRepository;
+    private final RetrieveUnitsRepository unitsRepository;
     private final Converter<ReviewDto, Review> converter;
 
     @Override

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import java.util.UUID;
 
 @Repository
-public interface UnitsRepository extends PagingAndSortingRepository<Unit, UUID> {
+public interface RetrieveUnitsRepository extends PagingAndSortingRepository<Unit, UUID> {
 
     @Query(value = "SELECT * "
             + "FROM RENTAPLACE.UNITS "

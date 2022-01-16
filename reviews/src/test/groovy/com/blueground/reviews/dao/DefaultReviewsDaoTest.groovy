@@ -5,7 +5,7 @@ import com.blueground.reviews.exception.error.ReviewsErrorCodes
 import com.blueground.reviews.model.dto.ReviewDto
 import com.blueground.reviews.model.entity.Review
 import com.blueground.reviews.repository.ReviewsRepository
-import com.blueground.units.repository.UnitsRepository
+import com.blueground.units.repository.RetrieveUnitsRepository
 import org.springframework.core.convert.converter.Converter
 import spock.lang.Specification
 import spock.lang.Unroll
@@ -13,7 +13,7 @@ import spock.lang.Unroll
 class DefaultReviewsDaoTest extends Specification {
 
     private ReviewsRepository reviewsRepository
-    private UnitsRepository unitsRepository
+    private RetrieveUnitsRepository unitsRepository
     private Converter<ReviewDto, Review> converter
     private ReviewsDao reviewsDao
 

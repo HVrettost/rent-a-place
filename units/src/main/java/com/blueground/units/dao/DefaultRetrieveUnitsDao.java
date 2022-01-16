@@ -3,7 +3,7 @@ package com.blueground.units.dao;
 import com.blueground.units.model.domain.PageReq;
 import com.blueground.units.model.dto.UnitDto;
 import com.blueground.units.model.entity.Unit;
-import com.blueground.units.repository.UnitsRepository;
+import com.blueground.units.repository.RetrieveUnitsRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class DefaultRetrieveUnitsDao implements RetrieveUnitsDao {
 
-    private final UnitsRepository unitsRepository;
+    private final RetrieveUnitsRepository unitsRepository;
     private final Converter<Unit, UnitDto> converter;
 
     @Override

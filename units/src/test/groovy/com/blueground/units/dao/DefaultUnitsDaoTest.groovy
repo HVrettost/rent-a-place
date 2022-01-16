@@ -3,7 +3,7 @@ package com.blueground.units.dao
 import com.blueground.units.model.domain.PageReq
 import com.blueground.units.model.dto.UnitDto
 import com.blueground.units.model.entity.Unit
-import com.blueground.units.repository.UnitsRepository
+import com.blueground.units.repository.RetrieveUnitsRepository
 import org.springframework.core.convert.converter.Converter
 import org.springframework.data.domain.Pageable
 import org.springframework.data.domain.SliceImpl
@@ -11,7 +11,7 @@ import spock.lang.Specification
 
 class DefaultUnitsDaoTest extends Specification {
 
-    private UnitsRepository unitsRepository
+    private RetrieveUnitsRepository unitsRepository
     private Converter<Unit, UnitDto> converter
     private RetrieveUnitsDao unitDao
 

@@ -1,4 +1,4 @@
-group 'com.blueground'
+group 'com.rentaplace'
 version '1.0'
 
 dependencies {

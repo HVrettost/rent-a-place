@@ -1,4 +1,4 @@
-group 'com.blueground.users'
+group 'com.rentaplace.users'
 version '1.0.0'
 
 bootJar {

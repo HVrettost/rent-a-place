@@ -1,4 +1,4 @@
-group 'com.blueground.functionaltests'
+group 'com.rentaplace.functionaltests'
 version '1.0'
 
 bootJar {

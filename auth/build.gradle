@@ -1,4 +1,4 @@
-group 'com.blueground.auth'
+group 'com.rentaplace.auth'
 version '1.0'
 
 bootJar {

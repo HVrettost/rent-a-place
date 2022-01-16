@@ -3,7 +3,7 @@ plugins {
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 }
 
-group 'com.blueground'
+group 'com.rentaplace'
 version '1.0'
 
 subprojects {
@@ -39,6 +39,6 @@ subprojects {
 
     test {
         useJUnitPlatform()
-        exclude('com/blueground/functionaltests/**')
+        exclude('com/rentaplace/functionaltests/**')
     }
 }

@@ -1,4 +1,5 @@
 INSERT INTO USERS VALUES('b5d46ba0-b0e0-4f0e-a399-e796c3969d3b', 'Robert', 'Martin', 'unclebob', '$2a$12$meMe5iToZsEAN0WZCHtPdO2LwQKqa..jEHt5ZsQzwrsomi3.BOFDu');
+INSERT INTO USERS VALUES('c0a6c0c7-18fb-4321-a555-900f38052f0e', 'Maria', 'Menounos', 'admin', '$2a$12$meMe5iToZsEAN0WZCHtPdO2LwQKqa..jEHt5ZsQzwrsomi3.BOFDu');
 
 INSERT INTO UNITS VALUES('b5d46ba0-b0e0-4f0e-a399-e796d3569d3a', 'image/url', 'Bay Area Majesty', 'San Fransisco', 'a description', FALSE, 300);
 INSERT INTO UNITS VALUES('b5d46ba0-b0e0-4f0e-a399-e796c3969d3a', 'image/url/2', 'Cupertino Lovers', 'San Fransisco', 'another description', FALSE, 400);

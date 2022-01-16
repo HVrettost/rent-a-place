@@ -3,7 +3,7 @@ plugins {
     id 'codenarc'
 }
 
-group 'com.blueground.codequality'
+group 'com.rentaplace.codequality'
 version '1.0'
 
 bootJar {

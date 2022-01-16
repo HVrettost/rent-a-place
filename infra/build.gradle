@@ -6,7 +6,7 @@ bootJar {
 }
 
 task postgresStart(type: Exec) {
-    commandLine 'docker-compose', '-f', 'docker/docker-compose.yml', 'up', '-d', 'rent-a-place-database'
+    commandLine 'docker-compose', '-f', 'docker/docker-compose.yml', 'up', '-d', 'rent-a-place-migration'
 }
 
 task postgresStop(type: Exec) {

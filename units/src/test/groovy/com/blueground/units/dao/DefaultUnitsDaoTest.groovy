@@ -13,12 +13,12 @@ class DefaultUnitsDaoTest extends Specification {
 
     private UnitsRepository unitsRepository
     private Converter<Unit, UnitDto> converter
-    private UnitsDao unitDao
+    private RetrieveUnitsDao unitDao
 
     def setup() {
         unitsRepository = Mock()
         converter = Mock()
-        unitDao = new DefaultUnitsDao(unitsRepository, converter)
+        unitDao = new DefaultRetrieveUnitsDao(unitsRepository, converter)
     }
 
     def "should return empty list if retrieved number of units is 0"() {

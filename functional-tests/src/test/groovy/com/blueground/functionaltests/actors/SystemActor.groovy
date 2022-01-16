@@ -1,6 +1,8 @@
 package com.blueground.functionaltests.actors
 
-class SystemActor implements com.blueground.functionaltests.actions.SystemActions {
+import com.blueground.functionaltests.actions.SystemActions
+
+class SystemActor implements SystemActions {
 
 
 }

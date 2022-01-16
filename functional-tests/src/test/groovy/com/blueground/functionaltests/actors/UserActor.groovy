@@ -1,4 +1,6 @@
 package com.blueground.functionaltests.actors
 
-class UserActor implements com.blueground.functionaltests.actions.UserActions{
+import com.blueground.functionaltests.actions.UserActions
+
+class UserActor implements UserActions{
 }

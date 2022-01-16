@@ -5,7 +5,7 @@ import com.blueground.units.model.dto.UnitDto;
 
 import java.util.List;
 
-public interface UnitsService {
+public interface RetrieveUnitsService {
 
     List<UnitDto> getUnitsByTitleAnRegion(String searchValue, PageReq pageRequest);
 }

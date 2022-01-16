@@ -5,7 +5,7 @@ import com.blueground.units.model.dto.UnitDto;
 
 import java.util.List;
 
-public interface UnitsDao {
+public interface RetrieveUnitsDao {
 
     List<UnitDto> getUnitsBySearchValueFromTokens(String searchValue, PageReq pageRequest);
 }

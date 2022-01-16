@@ -1,7 +1,5 @@
 ## RENT A PLACE OVERVIEW
-
-TL;DR;  
-A small application that you can rent a place / server side - `ONGOING`
+### A small application that you can rent a place / server side - `ONGOING`
 
 
 Technologies

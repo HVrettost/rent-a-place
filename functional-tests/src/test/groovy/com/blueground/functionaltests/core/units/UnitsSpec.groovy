@@ -170,6 +170,7 @@ class UnitsSpec extends RentAPlacelFTSetup implements UserUtils {
             def units = userActor.getUnitsPagedBySearchValue(restTemplate, searchValue, 0, 10, cookieWithAccessToken, userAgent)
 
         then: 'it should fetch results sorted in just one page'
+            units.body.size() == 3
             with (units.body) {
                 with (it[0]) {
                     title == 'Trade Center Majestic View'
@@ -191,5 +192,58 @@ class UnitsSpec extends RentAPlacelFTSetup implements UserUtils {
 
         then: 'it should be sorted based on average score'
             units.body.length == 0
+    }
+
+    def "should return all units paged according to multiple words search value successfully with given as keyword parts of the title"() {
+        given: '7 units'
+            Unit unit1 = systemActor.createNewUnit(restTemplate, new UnitCreationRequestDto('Athens', 'Majestic Overview in Trade Sea', new BigDecimal("500")))
+            Unit unit2 = systemActor.createNewUnit(restTemplate, new UnitCreationRequestDto('Athens', 'City Pleasure', new BigDecimal("800")))
+            Unit unit3 = systemActor.createNewUnit(restTemplate, new UnitCreationRequestDto('Dubai', 'Dessert magic', new BigDecimal("345")))
+            Unit unit4 = systemActor.createNewUnit(restTemplate, new UnitCreationRequestDto('New York', 'Trade Center Majestic View', new BigDecimal("980")))
+            Unit unit5 = systemActor.createNewUnit(restTemplate, new UnitCreationRequestDto('Athens', 'Acropolis View' , new BigDecimal("1000")))
+            Unit unit6 = systemActor.createNewUnit(restTemplate, new UnitCreationRequestDto('Athens', 'Lycabettus Majesty', new BigDecimal("290")))
+            Unit unit7 = systemActor.createNewUnit(restTemplate, new UnitCreationRequestDto('Athens', 'Kolonaki Majestic Avenue', new BigDecimal("1299")))
+
+        and: 'a user with access token'
+            def username = UUID.randomUUID().toString()
+            def password = 'password'
+            UserCreationRequestDto request = createUserRequest(username, password)
+            User user = systemActor.createNewUser(restTemplate, request)
+            def userAgent = 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0'
+            def cookieWithAccessToken = createAccessTokenForUser(userAgent, username, password)
+
+        and: 'reviews are done in some of the units from the user'
+            userActor.saveReview(restTemplate, new Review(score: 4, unitId: unit1.unitId, comment: 'comment 1', userId: user.userId), cookieWithAccessToken, userAgent)
+            userActor.saveReview(restTemplate, new Review(score: 5, unitId: unit4.unitId, comment: 'comment 2', userId: user.userId), cookieWithAccessToken, userAgent)
+
+        when: 'a call is made by the user to get the first page for the available units according to keyword MAJESTIC and TRADE'
+            def searchValue = 'MAJESTIC TRADE'
+            def units = userActor.getUnitsPagedBySearchValue(restTemplate, searchValue, 0, 10, cookieWithAccessToken, userAgent)
+
+        then: 'it should fetch results sorted in just one page'
+            units.body.size() == 2
+            with (units.body) {
+                with (it[0]) {
+                    title == 'Trade Center Majestic View'
+                    averageScore == 5
+                }
+                with (it[1]) {
+                    title == 'Majestic Overview in Trade Sea'
+                    averageScore == 4
+                }
+            }
+
+        when: 'a call is made by the user to get the first page for the available units according to keyword MAJESTIC and TRADE and IN and TRADE (in does not count as word for the postgres lexeme)'
+            searchValue = 'MAJESTIC IN OVERVIEW TRADE'
+            units = userActor.getUnitsPagedBySearchValue(restTemplate, searchValue, 0, 10, cookieWithAccessToken, userAgent)
+
+        then: 'it should fetch results sorted in just one page'
+            units.body.size() == 1
+            with (units.body) {
+                with (it[0]) {
+                    title == 'Majestic Overview in Trade Sea'
+                    averageScore == 4
+                }
+            }
     }
 }

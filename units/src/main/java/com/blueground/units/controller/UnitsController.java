@@ -5,7 +5,7 @@ import com.blueground.common.validator.Validator;
 import com.blueground.units.model.domain.PageReq;
 import com.blueground.units.model.dto.UnitDto;
 import com.blueground.units.api.UnitsApi;
-import com.blueground.units.service.UnitsService;
+import com.blueground.units.service.RetrieveUnitsService;
 import com.blueground.units.validator.SearchValueValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,7 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UnitsController implements UnitsApi {
 
-    private final UnitsService unitsService;
+    private final RetrieveUnitsService unitsService;
     private final SearchValueValidator searchValueValidator;
     private final Validator<PageReq> pageRequestValidator;
 

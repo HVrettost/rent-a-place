@@ -1,18 +1,18 @@
 package com.blueground.units.service
 
-import com.blueground.units.dao.UnitsDao
+import com.blueground.units.dao.RetrieveUnitsDao
 import com.blueground.units.model.domain.PageReq
 import com.blueground.units.model.dto.UnitDto
 import spock.lang.Specification
 
 class DefaultUnitsDaoTest extends Specification {
 
-    private UnitsDao unitsDao
-    private UnitsService unitsService
+    private RetrieveUnitsDao unitsDao
+    private RetrieveUnitsService unitsService
 
     def setup() {
         unitsDao = Mock()
-        unitsService = new DefaultUnitsService(unitsDao)
+        unitsService = new DefaultRetrieveUnitsService(unitsDao)
     }
 
     def "should propagate call to dao and return result list of unit dtos"() {

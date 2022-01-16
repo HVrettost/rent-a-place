@@ -1,5 +1,6 @@
 version: '3.9'
 services:
+
   rent-a-place-application:
     build: ../../.
     container_name: rent-a-place-application
@@ -22,7 +23,7 @@ services:
     container_name: rent-a-place-database
 
   rent-a-place-migration:
-    image: flyway/flyway:8.2.3
+    image: flyway/flyway:8.4.1
     environment:
       FLYWAY_USER: rentaplace_user
       FLYWAY_PASSWORD: rentaplace_password
@@ -32,5 +33,5 @@ services:
     depends_on:
       - rent-a-place-database
     volumes:
-      - ./migration-scripts:/flyway/sql
-    container_name: rent-a-place-flyway
+      - ../migration-scripts:/flyway/sql
+    container_name: rent-a-place-migration

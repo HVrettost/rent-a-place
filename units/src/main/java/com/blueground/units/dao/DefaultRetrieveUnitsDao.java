@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
-public class DefaultUnitsDao implements UnitsDao {
+public class DefaultRetrieveUnitsDao implements RetrieveUnitsDao {
 
     private final UnitsRepository unitsRepository;
     private final Converter<Unit, UnitDto> converter;
@@ -27,11 +27,15 @@ public class DefaultUnitsDao implements UnitsDao {
     @Override
     public List<UnitDto> getUnitsBySearchValueFromTokens(String searchValue, PageReq pageRequest) {
         Pageable pageable = PageRequest.of(pageRequest.getPage(), pageRequest.getPageSize());
-        Slice<Unit> unitsPage =  unitsRepository.findUnitsByVectorizedValues(searchValue, pageable);
+        Slice<Unit> unitsPage =  unitsRepository.findUnitsByVectorizedValues(prepareSearchValueForQuery(searchValue), pageable);
 
         return unitsPage.getContent()
                 .stream()
                 .map(converter::convert)
                 .collect(Collectors.toList());
+    }
+
+    private String prepareSearchValueForQuery(String searchValue) {
+        return searchValue.trim().replace(" ", " & ");
     }
 }

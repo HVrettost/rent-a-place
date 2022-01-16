@@ -2,7 +2,7 @@ package com.blueground.units.service;
 
 import com.blueground.units.model.domain.PageReq;
 import com.blueground.units.model.dto.UnitDto;
-import com.blueground.units.dao.UnitsDao;
+import com.blueground.units.dao.RetrieveUnitsDao;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,9 +11,9 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class DefaultUnitsService implements UnitsService {
+public class DefaultRetrieveUnitsService implements RetrieveUnitsService {
 
-    private final UnitsDao unitsDao;
+    private final RetrieveUnitsDao unitsDao;
 
     @Override
     @Transactional(readOnly = true)
